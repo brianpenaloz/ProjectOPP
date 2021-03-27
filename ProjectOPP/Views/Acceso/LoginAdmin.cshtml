@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "LoginAdmin";
+    Layout = "~/Views/Shared/LayoutLogin.cshtml";
+}
+
+<p class="login-box-msg">Ingrese sus credenciales</p>
+
+<div class="danger">
+    @ViewBag.Error
+</div>
+<form action="@Url.Content("~/Acceso/LoginAdmin")" method="post">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Usuario" name="usuario">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-user"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="password" class="form-control" placeholder="Clave" name="clave">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        </div>
+        <!-- /.col -->
+    </div>
+</form>
+
+<p class="mb-1">
+    <a href="forgot-password.html">Olvide mi clave</a>
+</p>
+<p class="mb-0">
+    <a href="register.html" class="text-center">Registrarse</a>
+</p>
