@@ -63,19 +63,32 @@ namespace ProjectOPP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logup(string usuario, string clave)
+        public ActionResult Logup(string Nombres, string Apellidos, string Correo, DateTime FecNacimiento, string Usuario, string Clave)
         {
             try
             {
-                //Usuario Existe = u.Logup(usuario, clave);
+                Persona persona = new Persona
+                {
+                    Nombres = Nombres,
+                    Apellidos = Apellidos,
+                    Correo = Correo,
+                    FecNacimiento = FecNacimiento
+                };
 
-                //if (Existe == null)
-                //{
-                //    ViewBag.Error = "Usuario o clave invalido";
-                //    return View();
-                //}
+                p.Create(persona);
 
-                //Session["User"] = Existe;
+                Usuario usuario = new Usuario
+                {
+                    User = Usuario,
+                    Clave = Clave,
+                    Persona = p.GetLastId(),
+                    Rol = 1
+                };
+
+                u.Create(usuario);
+
+                Session["User"] = usuario;
+                Session["Pers"] = persona;
 
                 return RedirectToAction("Index", "Persona");
             }

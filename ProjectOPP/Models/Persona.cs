@@ -21,12 +21,11 @@ namespace ProjectOPP.Models
 
         public void Create(Persona persona)
         {
-            string query = "insert into tb_persona (ID, Nombres, Apellidos, Correo, FecNacimiento) values (@id, @nombres, @apellidos, @correo, @fecha)";
+            string query = "insert into tb_persona (Nombres, Apellidos, Correo, FecNacimiento) values (@nombres, @apellidos, @correo, @fecha)";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@id", persona.ID);
                 command.Parameters.AddWithValue("@nombres", persona.Nombres);
                 command.Parameters.AddWithValue("@apellidos", persona.Apellidos);
                 command.Parameters.AddWithValue("@correo", persona.Correo);
@@ -162,6 +161,38 @@ namespace ProjectOPP.Models
                     conn.Open();
                     command.ExecuteNonQuery();
                     conn.Close();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error: " + e.Message);
+                }
+            }
+        }
+
+        public int GetLastId()
+        {
+            string query = "select top 1 id from tb_persona order by id desc";
+
+            using (SqlConnection conn = new SqlConnection(con.connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+
+                try
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+
+                    Persona objPer = new Persona
+                    {
+                        ID = reader.GetInt32(0)
+                    };
+
+                    reader.Close();
+                    conn.Close();
+
+                    return objPer.ID;
                 }
                 catch (Exception e)
                 {
