@@ -15,8 +15,6 @@ namespace ProjectOPP.Models
         public string Apellidos { get; set; }
         public string Correo { get; set; }
         public DateTime FecNacimiento { get; set; }
-        private int Estado { get; set; }
-
 
         //public string connectionString = "data source=DESKTOP-NVGBAVV;initial catalog=DB_PracticasPre;user id=sa; password=sql;";
         readonly Conexion con = new Conexion();

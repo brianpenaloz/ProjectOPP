@@ -9,11 +9,15 @@ namespace ProjectOPP.Controllers
 {
     public class PersonaController : Controller
     {
-        Persona p = new Persona();
+        readonly Persona p = new Persona();
+        readonly Rol r = new Rol();
+        readonly Usuario u = new Usuario();
 
         // GET: Persona
         public ActionResult Index()
         {
+            ViewBag.Nombre = ((Persona)Session["Pers"]).Nombres;
+
             List<Persona> lista = p.Read();
             return View(lista);
         }

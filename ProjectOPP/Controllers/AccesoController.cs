@@ -9,7 +9,8 @@ namespace ProjectOPP.Controllers
 {
     public class AccesoController : Controller
     {
-        Usuario u = new Usuario();
+        readonly Usuario u = new Usuario();
+        readonly Persona p = new Persona();
 
         // GET: Acceso
         public ActionResult Index()
@@ -28,19 +29,28 @@ namespace ProjectOPP.Controllers
             int rol = 1;
             try
             {
-                Usuario Existe = u.Login(usuario, clave, rol);
-
-                if(Existe == null)
+                if (usuario.Trim() == "" || clave.Trim() == "")
                 {
                     ViewBag.Error = "Usuario o clave invalido";
                     return View();
                 }
+                else
+                {
+                    Usuario Existe = u.Login(usuario, clave, rol);
 
-                Session["User"] = Existe;
+                    if (Existe == null)
+                    {
+                        ViewBag.Error = "Usuario o clave invalido";
+                        return View();
+                    }
 
-                return RedirectToAction("Index", "Persona");
+                    Session["User"] = Existe;
+                    Session["Pers"] = p.Read(Existe.Persona);
+
+                    return RedirectToAction("Index", "Persona");
+                }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ViewBag.Error = e.Message;
                 return View();
@@ -57,15 +67,15 @@ namespace ProjectOPP.Controllers
         {
             try
             {
-                Usuario Existe = u.Logup(usuario, clave);
+                //Usuario Existe = u.Logup(usuario, clave);
 
-                if (Existe == null)
-                {
-                    ViewBag.Error = "Usuario o clave invalido";
-                    return View();
-                }
+                //if (Existe == null)
+                //{
+                //    ViewBag.Error = "Usuario o clave invalido";
+                //    return View();
+                //}
 
-                Session["User"] = Existe;
+                //Session["User"] = Existe;
 
                 return RedirectToAction("Index", "Persona");
             }
@@ -84,7 +94,7 @@ namespace ProjectOPP.Controllers
         [HttpPost]
         public ActionResult LoginAdmin(string usuario, string clave)
         {
-            int rol = 1;
+            int rol = 2;
             try
             {
                 Usuario Existe = u.Login(usuario, clave, rol);
@@ -105,5 +115,12 @@ namespace ProjectOPP.Controllers
                 return View();
             }
         }
+
+        public ActionResult Logout()
+        {
+            Session["User"] = null;
+            return RedirectToAction("Index", "Home");
+        }
     }
+
 }

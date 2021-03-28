@@ -56,6 +56,13 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Bienvenido @ViewBag.Nombre</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="@Url.Action("Logout", "Acceso")" class="nav-link">Cerrar sesion</a>
+                </li>
+
                 <!-- Navbar Search -->
                 <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">

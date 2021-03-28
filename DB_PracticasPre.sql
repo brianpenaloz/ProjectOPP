@@ -63,9 +63,8 @@ USE DB_PracticasPre;
 --INSERT INTO TB_Rol
 --  ( ID, Nombre)
 --VALUES
---  (1, 'Usuario'), 
---  (2, 'Administrador'), 
---  (3, 'Super Administrador');
+--  (1, 'Estudiante'), 
+--  (2, 'Administrador');
 
 --INSERT INTO TB_Modulo
 --  ( ID, Nombre)
@@ -95,7 +94,7 @@ USE DB_PracticasPre;
 --VALUES
 --  (1, 'brian', '123', 1, 1), 
 --  (2, 'axel', '123', 2, 2), 
---  (3, 'isabelle', '123', 3, 3);
+--  (3, 'isabelle', '123', 3, 1);
 
 
 
@@ -133,3 +132,5 @@ SELECT TOP (1000) [ID]
       ,[ID_Persona]
       ,[ID_Rol]
   FROM [DB_PracticasPre].[dbo].[TB_Usuario];
+
+  select id, usuario, clave, id_persona, id_rol from tb_usuario where usuario = @usuario and clave = @clave and id_rol = @rol
