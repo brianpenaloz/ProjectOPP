@@ -5,14 +5,6 @@
 
 USE DB_PracticasPre;
 
---CREATE TABLE TB_Persona (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Nombres varchar(255) NOT NULL,
---    Apellidos varchar(255),
---    Correo varchar(255),
---    FecNacimiento date
---);
-
 --CREATE TABLE TB_Rol (
 --    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
 --    Nombre varchar(255) NOT NULL
@@ -37,9 +29,11 @@ USE DB_PracticasPre;
 
 --CREATE TABLE TB_Usuario (
 --    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Usuario varchar(255) NOT NULL,
+--    Nombres varchar(255) NOT NULL,
+--    Apellidos varchar(255),
+--    FecNacimiento date,
+--    Correo varchar(255),
 --    Clave varchar(255),
---    ID_Persona int FOREIGN KEY REFERENCES TB_Persona(ID),
 --    ID_Rol int FOREIGN KEY REFERENCES TB_Rol(ID)
 --);
 
@@ -47,24 +41,19 @@ USE DB_PracticasPre;
 --    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
 --    Numero varchar(255) NOT NULL,
 --    FecCreacion datetime,
---    ID_Persona int FOREIGN KEY REFERENCES TB_Persona(ID)
+--    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID)
 --);
 
 
 
 
---INSERT INTO TB_Persona
---  ( Nombres, Apellidos, Correo, FecNacimiento)
---VALUES
---  ('Brian', 'Peñaloza', '2013016328@unfv.edu.pe', '1995-04-17'), 
---  ('Axel', 'Carhuatocto', '2013016328@unfv.edu.pe', '1995-04-17'), 
---  ('Isabelle', 'Cabrejos', '2013016328@unfv.edu.pe', '1995-04-17');
+
 
 --INSERT INTO TB_Rol
 --  ( Nombre)
 --VALUES
---  ('Estudiante'), 
---  ('Administrador');
+--  ('Administrador'), 
+--  ('Estudiante');
 
 --INSERT INTO TB_Modulo
 --  ( Nombre)
@@ -90,23 +79,23 @@ USE DB_PracticasPre;
 --  (1, 1, 4);
 
 --INSERT INTO TB_Usuario
---  ( Usuario, Clave, ID_Persona, ID_Rol)
+--  ( Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol)
 --VALUES
---  ('2013016328@unfv.edu.pe', '2013016328', 1, 1), 
---  ('2013016328@unfv.edu.pe', '2013016328', 2, 2), 
---  ('2013016328@unfv.edu.pe', '2013016328', 3, 1);
+--  ('Martin', 'Gavino', '1995-04-17', 'martin@unfv.edu.pe', 123, 1),
+--  ('Brian', 'Peñaloza', '1995-04-17', '2013016328@unfv.edu.pe', 123, 2),
+--  ('Axel', 'Carhuatocto', '1995-04-17', '2014016328@unfv.edu.pe', 123, 2), 
+--  ('Isabelle', 'Cabrejos', '1995-04-17', '2015016328@unfv.edu.pe', 123, 2);
+
+--INSERT INTO TB_Tramite
+--  ( Numero, FecCreacion, ID_Usuario)
+--VALUES
+--  ('0001', CURRENT_TIMESTAMP, 1);
+  --('0002', '2021-03-29', 2), 
+  --('0003', '2021-03-29', 3);
 
 
 
 
-SELECT TOP (1000) [ID]
-      ,[Nombres]
-      ,[Apellidos]
-	  ,[Correo]
-      ,[FecNacimiento]
-  FROM [DB_PracticasPre].[dbo].[TB_Persona];
-
-  --DELETE FROM TB_Persona WHERE ID = 4
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
@@ -127,10 +116,24 @@ SELECT TOP (1000) [ID]
   FROM [DB_PracticasPre].[dbo].[TB_Detalle_Rol_Modulo_Operacion];
 
 SELECT TOP (1000) [ID]
-      ,[Usuario]
+      ,[Nombres]
+      ,[Apellidos]
+      ,[FecNacimiento]
+	  ,[Correo]
       ,[Clave]
-      ,[ID_Persona]
       ,[ID_Rol]
   FROM [DB_PracticasPre].[dbo].[TB_Usuario];
 
-  --select id, usuario, clave, id_persona, id_rol from tb_usuario where usuario = 'brian' and clave = 123 and id_rol = 1
+SELECT TOP (1000) [ID]
+      ,[Numero]
+      ,[FecCreacion]
+      ,[ID_Usuario]
+  FROM [DB_PracticasPre].[dbo].[TB_Tramite];
+
+    
+	
+--DELETE FROM TB_Persona WHERE ID = 4
+
+--SELECT ID, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = '2013016328@unfv.edu.pe' AND Clave = 123 AND ID_Rol = 1;
+--SELECT TOP 1 ID FROM TB_Usuario ORDER BY ID DESC
+--UPDATE TB_Usuario SET ID_Rol = 2 WHERE ID in (2, 3, 4);
