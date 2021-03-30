@@ -10,7 +10,6 @@ namespace ProjectOPP.Controllers
     public class AccesoController : Controller
     {
         readonly Usuario u = new Usuario();
-        readonly Persona p = new Persona();
 
         // GET: Acceso
         public ActionResult Index()
@@ -24,30 +23,29 @@ namespace ProjectOPP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string usuario, string clave)
+        public ActionResult Login(string correo, string clave)
         {
-            int rol = 1;
+            int rol = 2;
             try
             {
-                if (usuario.Trim() == "" || clave.Trim() == "")
+                if (correo.Trim() == "" || clave.Trim() == "")
                 {
-                    ViewBag.Error = "Usuario o clave invalido";
+                    ViewBag.Error = "correo o clave invalido";
                     return View();
                 }
                 else
                 {
-                    Usuario Existe = u.Login(usuario, clave, rol);
+                    Usuario existe = u.Login(correo, clave, rol);
 
-                    if (Existe == null)
+                    if (existe == null)
                     {
-                        ViewBag.Error = "Usuario o clave invalido";
+                        ViewBag.Error = "correo o clave invalido";
                         return View();
                     }
 
-                    Session["User"] = Existe;
-                    Session["Pers"] = p.Read(Existe.Persona);
+                    Session["User"] = existe;
 
-                    return RedirectToAction("Index", "Persona");
+                    return RedirectToAction("Index", "Estudiante");
                 }
             }
             catch (Exception e)
@@ -63,34 +61,25 @@ namespace ProjectOPP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logup(string Nombres, string Apellidos, string Correo, DateTime FecNacimiento, string Usuario, string Clave)
+        public ActionResult Logup(string nombre, string apellido, DateTime fecnacimiento, string correo, string clave)
         {
             try
             {
-                Persona persona = new Persona
+                Usuario creado = new Usuario
                 {
-                    Nombres = Nombres,
-                    Apellidos = Apellidos,
-                    Correo = Correo,
-                    FecNacimiento = FecNacimiento
+                    Nombres = nombre,
+                    Apellidos = apellido,
+                    FecNacimiento = fecnacimiento,
+                    Correo = correo,
+                    Clave = clave,
+                    ID_Rol = 2
                 };
 
-                p.Create(persona);
+                u.Logup(creado);
 
-                Usuario usuario = new Usuario
-                {
-                    User = Usuario,
-                    Clave = Clave,
-                    Persona = p.GetLastId(),
-                    Rol = 1
-                };
+                Session["User"] = creado;
 
-                u.Create(usuario);
-
-                Session["User"] = usuario;
-                Session["Pers"] = persona;
-
-                return RedirectToAction("Index", "Persona");
+                return RedirectToAction("Index", "Estudiante");
             }
             catch (Exception e)
             {
@@ -105,22 +94,22 @@ namespace ProjectOPP.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoginAdmin(string usuario, string clave)
+        public ActionResult LoginAdmin(string correo, string clave)
         {
-            int rol = 2;
+            int rol = 1;
             try
             {
-                Usuario Existe = u.Login(usuario, clave, rol);
+                Usuario existe = u.Login(correo, clave, rol);
 
-                if (Existe == null)
+                if (existe == null)
                 {
-                    ViewBag.Error = "Usuario o clave invalido";
+                    ViewBag.Error = "correo o clave invalido";
                     return View();
                 }
 
-                Session["User"] = Existe;
+                Session["User"] = existe;
 
-                return RedirectToAction("Index", "Persona");
+                return RedirectToAction("Index", "Administrador");
             }
             catch (Exception e)
             {

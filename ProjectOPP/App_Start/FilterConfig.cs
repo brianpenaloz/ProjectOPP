@@ -8,7 +8,7 @@ namespace ProjectOPP
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            //filters.Add(new Filters.VerificaSession());
+            filters.Add(new Filters.VerificaSession());
         }
     }
 }

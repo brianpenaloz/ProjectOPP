@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/LayoutLogin.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "signupform" }))
 {
     @Html.AntiForgeryToken()
 
@@ -15,7 +15,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Nombres" name="Nombres">
+            <input type="text" class="form-control" placeholder="Nombres" name="nombre">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Apellidos" name="Apellidos">
+            <input type="text" class="form-control" placeholder="Apellidos" name="apellido">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -33,7 +33,11 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Correo" name="Correo">
+            <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="fecnacimiento">
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Correo" name="correo">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -42,11 +46,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="FecNacimiento">
-        </div>
-
-        <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Usuario" name="Usuario">
+            <input type="text" class="form-control" placeholder="Clave" name="clave">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -55,16 +55,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Clave" name="Clave">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Repetir clave" name="Clavedos">
+            <input type="text" class="form-control" placeholder="Repetir clave" name="clavedos">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>

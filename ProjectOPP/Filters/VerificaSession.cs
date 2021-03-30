@@ -11,7 +11,7 @@ namespace ProjectOPP.Filters
     public class VerificaSession : ActionFilterAttribute
     {
         private Usuario usuario;
-        //private string usuario;
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             try
@@ -19,9 +19,8 @@ namespace ProjectOPP.Filters
                 base.OnActionExecuting(filterContext);
 
                 usuario = (Usuario)HttpContext.Current.Session["User"];
-                //usuario = (string)HttpContext.Current.Session["User"];
 
-                if (usuario == null)
+                if (usuario == null && !(filterContext.ActionDescriptor.ActionName == "Index" && filterContext.ActionDescriptor.ControllerDescriptor.ControllerName == "Home"))
                 {
                     if(filterContext.Controller is AccesoController == false)
                     {
@@ -32,6 +31,7 @@ namespace ProjectOPP.Filters
             catch (Exception e)
             {
                 filterContext.Result = new RedirectResult("~/Acceso/Login");
+                throw new Exception("Error: " + e.Message);
             }
         }
     }

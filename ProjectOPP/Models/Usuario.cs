@@ -10,25 +10,29 @@ namespace ProjectOPP.Models
     public class Usuario
     {
         public int ID { get; set; }
-        [DisplayName("Usuario")]
-        public string User { get; set; }
+        [DisplayName("Nombre")]
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public DateTime FecNacimiento { get; set; }
+        public string Correo { get; set; }
         public string Clave { get; set; }
-        public int Persona { get; set; }
-        public int Rol { get; set; }
+        public int ID_Rol { get; set; }
 
         readonly Conexion con = new Conexion();
 
-        public void Create(Usuario usuario)
+        public void Logup(Usuario usuario)
         {
-            string query = "insert into tb_usuario (usuario, clave, id_persona, id_rol) values (@usuario, @clave, @persona, @rol)";
+            string query = "INSERT INTO TB_Usuario (Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol) VALUES (@nombres, @apellidos, @fecnacimiento, @correo, @clave, @id_rol)";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@usuario", usuario.User);
+                command.Parameters.AddWithValue("@nombres", usuario.Nombres);
+                command.Parameters.AddWithValue("@apellidos", usuario.Apellidos);
+                command.Parameters.AddWithValue("@fecnacimiento", usuario.FecNacimiento);
+                command.Parameters.AddWithValue("@correo", usuario.Correo);
                 command.Parameters.AddWithValue("@clave", usuario.Clave);
-                command.Parameters.AddWithValue("@persona", usuario.Persona);
-                command.Parameters.AddWithValue("@rol", usuario.Rol);
+                command.Parameters.AddWithValue("@id_rol", usuario.ID_Rol);
 
                 try
                 {
@@ -43,16 +47,16 @@ namespace ProjectOPP.Models
             }
         }
 
-        public Usuario Login(string Usuario, string Clavex, int Rolex)
+        public Usuario Login(string correo, string clave, int rol)
         {
-            string query = "select id, usuario, clave, id_persona, id_rol from tb_usuario where usuario = @usuario and clave = @clave and id_rol = @rol";
+            string query = "SELECT ID, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = @correo and Clave = @clave and ID_Rol = @id_rol";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@usuario", Usuario.Trim());
-                command.Parameters.AddWithValue("@clave", Clavex.Trim());
-                command.Parameters.AddWithValue("@rol", Rolex);
+                command.Parameters.AddWithValue("@correo", correo.Trim());
+                command.Parameters.AddWithValue("@clave", clave.Trim());
+                command.Parameters.AddWithValue("@id_rol", rol);
 
                 try
                 {
@@ -64,10 +68,12 @@ namespace ProjectOPP.Models
                     Usuario usuario = new Usuario
                     {
                         ID = reader.GetInt32(0),
-                        User = reader.GetString(1),
-                        Clave = reader.GetString(2),
-                        Persona = reader.GetInt32(3),
-                        Rol = reader.GetInt32(4)
+                        Nombres = reader.GetString(1),
+                        Apellidos = reader.GetString(2),
+                        FecNacimiento = reader.GetDateTime(3),
+                        Correo = reader.GetString(4),
+                        Clave = reader.GetString(5),
+                        ID_Rol = reader.GetInt32(6)
                     };
 
                     reader.Close();
