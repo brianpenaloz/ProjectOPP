@@ -46,7 +46,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Clave" name="clave">
+            <input type="password" class="form-control" placeholder="Clave" name="clave">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Repetir clave" name="clavedos">
+            <input type="password" class="form-control" placeholder="Repetir clave" name="clavedos">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -78,3 +78,28 @@
 <div>
     @Html.ActionLink("Ir al inicio", "Index", "Home")
 </div>
+
+@section scripts
+{
+    <script>
+        //$(document).ready(function () {
+        //    $("#signupform").submit(function (e) {
+        //        e.preventDefault();
+
+        //        url = "www.google.com"
+        //        parametros = $(this).serialize();
+
+        //        alert("1")
+
+        //        $.post(url, parametros, function (data){
+
+        //            if (data == "1") {
+        //                document.location.href = "www.youtube.com";
+        //            } else {
+        //                alert(data)
+        //            }
+        //        })
+        //    })
+        //})
+    </script>   
+}
