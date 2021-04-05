@@ -12,7 +12,7 @@ namespace ProjectOPP.Controllers
         // GET: Administrador
         public ActionResult Index()
         {
-            ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+            //ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
             return View();
         }
     }

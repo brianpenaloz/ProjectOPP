@@ -16,7 +16,7 @@ namespace ProjectOPP.Controllers
         // GET: Persona
         public ActionResult Index()
         {
-            ViewBag.Nombre = ((Persona)Session["Pers"]).Nombres;
+            ViewBag.Nombre = ((Persona)Session["User"]).Nombres;
 
             List<Persona> lista = p.Read();
             return View(lista);

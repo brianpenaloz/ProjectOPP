@@ -12,7 +12,12 @@ namespace ProjectOPP.Controllers
         // GET: Estudiante
         public ActionResult Index()
         {
-            ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+            //ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+            return View();
+        }
+
+        public ActionResult Save(Tramite tramite)
+        {
             return View();
         }
     }

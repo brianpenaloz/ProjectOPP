@@ -130,6 +130,7 @@
     <Compile Include="Models\Conexion.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Tramite.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2148,6 +2149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Tramites\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
