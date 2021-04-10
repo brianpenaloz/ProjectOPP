@@ -39,12 +39,17 @@ USE DB_PracticasPre;
 
 --CREATE TABLE TB_Tramite (
 --    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Numero varchar(255) NOT NULL,
+--	  Tramite varchar(255),
+--	  DependenciaReferencia varchar(255),
+--    NumeroTramite varchar(255),
 --    FecCreacion datetime,
+--	  FundamentoSolicitud varchar(255),
 --    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID)
 --);
 
-
+ALTER TABLE TB_Tramite ADD Tramite varchar(255);
+ALTER TABLE TB_Tramite ADD DependenciaReferencia varchar(255);
+ALTER TABLE TB_Tramite ADD FundamentoSolicitud varchar(255);
 
 
 
@@ -128,6 +133,9 @@ SELECT TOP (1000) [ID]
       ,[Numero]
       ,[FecCreacion]
       ,[ID_Usuario]
+      ,[Tramite]
+      ,[DependenciaReferencia]
+      ,[FundamentoSolicitud]
   FROM [DB_PracticasPre].[dbo].[TB_Tramite];
 
     

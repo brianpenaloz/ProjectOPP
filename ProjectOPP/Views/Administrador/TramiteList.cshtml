@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ProjectOPP.Models.Tramite>
+
+@{
+    ViewBag.Title = "TramiteList";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>TramiteList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cadena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tramit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DependenciaReferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroTramite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FecCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FundamentoSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cadena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tramit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DependenciaReferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroTramite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FecCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FundamentoSolicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
