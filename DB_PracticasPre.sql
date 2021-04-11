@@ -6,30 +6,31 @@
 USE DB_PracticasPre;
 
 --CREATE TABLE TB_Rol (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Nombre varchar(255) NOT NULL
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Nombre varchar(255)
 --);
 
 --CREATE TABLE TB_Modulo (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Nombre varchar(255) NOT NULL
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Nombre varchar(255)
 --);
 
 --CREATE TABLE TB_Operacion (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Nombre varchar(255) NOT NULL
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Nombre varchar(255)
 --);
 
 --CREATE TABLE TB_Detalle_Rol_Modulo_Operacion (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
+--    ID int PRIMARY KEY IDENTITY(1,1),
 --    ID_Rol int FOREIGN KEY REFERENCES TB_Rol(ID),
 --    ID_Modulo int FOREIGN KEY REFERENCES TB_Modulo(ID),
 --    ID_Operacion int FOREIGN KEY REFERENCES TB_Operacion(ID)
 --);
 
 --CREATE TABLE TB_Usuario (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
---    Nombres varchar(255) NOT NULL,
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Codigo varchar(255),
+--    Nombres varchar(255),
 --    Apellidos varchar(255),
 --    FecNacimiento date,
 --    Correo varchar(255),
@@ -37,8 +38,10 @@ USE DB_PracticasPre;
 --    ID_Rol int FOREIGN KEY REFERENCES TB_Rol(ID)
 --);
 
+--ALTER TABLE TB_Usuario ADD Codigo varchar(255);
+
 --CREATE TABLE TB_Tramite (
---    ID int NOT NULL PRIMARY KEY IDENTITY(1,1),
+--    ID int PRIMARY KEY IDENTITY(1,1),
 --	  Tramite varchar(255),
 --	  DependenciaReferencia varchar(255),
 --    NumeroTramite varchar(255),
@@ -47,9 +50,11 @@ USE DB_PracticasPre;
 --    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID)
 --);
 
-ALTER TABLE TB_Tramite ADD Tramite varchar(255);
-ALTER TABLE TB_Tramite ADD DependenciaReferencia varchar(255);
-ALTER TABLE TB_Tramite ADD FundamentoSolicitud varchar(255);
+--ALTER TABLE TB_Tramite ADD Tramite varchar(255);
+--ALTER TABLE TB_Tramite ADD DependenciaReferencia varchar(255);
+--ALTER TABLE TB_Tramite ADD FundamentoSolicitud varchar(255);
+--ALTER TABLE TB_Tramite DROP COLUMN Numero;
+--ALTER TABLE TB_Tramite ADD NumeroTramite varchar(255);
 
 
 
@@ -84,19 +89,18 @@ ALTER TABLE TB_Tramite ADD FundamentoSolicitud varchar(255);
 --  (1, 1, 4);
 
 --INSERT INTO TB_Usuario
---  ( Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol)
+--  ( Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol)
 --VALUES
---  ('Martin', 'Gavino', '1995-04-17', 'martin@unfv.edu.pe', 123, 1),
---  ('Brian', 'Peñaloza', '1995-04-17', '2013016328@unfv.edu.pe', 123, 2),
---  ('Axel', 'Carhuatocto', '1995-04-17', '2014016328@unfv.edu.pe', 123, 2), 
---  ('Isabelle', 'Cabrejos', '1995-04-17', '2015016328@unfv.edu.pe', 123, 2);
+--  ( 1999014123, 'Martin', 'Gavino', '1995-04-17', 'martin@unfv.edu.pe', 123, 1),
+--  ( 2013016328, 'Brian', 'Peñaloza', '1995-04-17', '2013016328@unfv.edu.pe', 123, 2),
+--  ( 2014123456, 'Axel', 'Carhuatocto', '1995-04-17', '2014123456@unfv.edu.pe', 123, 2), 
+--  ( 2014987147, 'Isabelle', 'Cabrejos', '1995-04-17', '2014987147@unfv.edu.pe', 123, 2);
 
 --INSERT INTO TB_Tramite
---  ( Numero, FecCreacion, ID_Usuario)
+--  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, ID_Usuario)
 --VALUES
---  ('0001', CURRENT_TIMESTAMP, 1);
-  --('0002', '2021-03-29', 2), 
-  --('0003', '2021-03-29', 3);
+--  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'FIIS', '00001', CURRENT_TIMESTAMP, 'Este es el fundamento', 2),
+--  ('CONSTANCIA DE PRACTICAS PRE-PROFESIONALES', 'FIIS', '00002', CURRENT_TIMESTAMP, 'Este es el fundamento', 2);
 
 
 
@@ -121,6 +125,7 @@ SELECT TOP (1000) [ID]
   FROM [DB_PracticasPre].[dbo].[TB_Detalle_Rol_Modulo_Operacion];
 
 SELECT TOP (1000) [ID]
+	  ,[Codigo]
       ,[Nombres]
       ,[Apellidos]
       ,[FecNacimiento]
@@ -130,18 +135,18 @@ SELECT TOP (1000) [ID]
   FROM [DB_PracticasPre].[dbo].[TB_Usuario];
 
 SELECT TOP (1000) [ID]
-      ,[Numero]
-      ,[FecCreacion]
-      ,[ID_Usuario]
       ,[Tramite]
       ,[DependenciaReferencia]
+      ,[NumeroTramite]
+      ,[FecCreacion]
       ,[FundamentoSolicitud]
+      ,[ID_Usuario]
   FROM [DB_PracticasPre].[dbo].[TB_Tramite];
 
     
 	
---DELETE FROM TB_Persona WHERE ID = 4
+--DELETE FROM TB_Tramite WHERE ID = 4
 
 --SELECT ID, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = '2013016328@unfv.edu.pe' AND Clave = 123 AND ID_Rol = 1;
 --SELECT TOP 1 ID FROM TB_Usuario ORDER BY ID DESC
---UPDATE TB_Usuario SET ID_Rol = 2 WHERE ID in (2, 3, 4);
+--UPDATE TB_Usuario SET Codigo = '2013016328' WHERE ID in (2, 3, 4);

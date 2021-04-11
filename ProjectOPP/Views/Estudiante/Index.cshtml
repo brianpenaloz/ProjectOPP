@@ -10,42 +10,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Descargar formato</h1><button>PDF</button>
+                <h1>Bienvenido</h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
-
-@using(Html.BeginForm("Save", "Estudiante", FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
-    // Para tener seguridad de que tu Backend no sea solicitado por otro sitio, cuando te hacen Web scraping o raspado web
-    // Se bloquea el formulario
-    // https://www.youtube.com/watch?v=twvTc_4LSf0&ab_channel=hdeleon.net
-    @Html.AntiForgeryToken();
-
-    <div class="row">
-        <div class="col-md-6 col-lg-offset-3">
-            <div class="form-group">
-                @Html.LabelFor(d => d.Archivo1)
-                @Html.TextBoxFor(d => d.Archivo1, new { @class = "form-control", type = "file", accept = ".png" })
-                @Html.ValidationMessageFor(d => d.Archivo1, "", new { @class = "txt-danger" })
-            </div>
-            @*<div class="form-group">
-                @Html.LabelFor(d => d.Archivo2)
-                @Html.TextBoxFor(d => d.Archivo2, new { @class = "form-control", type = "file", accept = ".png" })
-                @Html.ValidationMessageFor(d => d.Archivo2, "", new { @class = "txt-danger" })
-            </div>*@
-            <div class="form-group">
-                @Html.LabelFor(d => d.Cadena)
-                @Html.TextBoxFor(d => d.Cadena, new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.Cadena, "", new { @class = "txt-danger" })
-            </div>
-            <div class="form-group" style="text-align:right">
-                <input type="submit" class="btn btn-success" value="Guardar" />
-            </div>
-        </div>
-    </div>
-}
 
 <!-- Main content -->
 <section class="content">

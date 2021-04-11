@@ -10,6 +10,7 @@ namespace ProjectOPP.Models
     public class Usuario
     {
         public int ID { get; set; }
+        public string Codigo { get; set; }
         [DisplayName("Nombre")]
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
@@ -22,11 +23,12 @@ namespace ProjectOPP.Models
 
         public void Logup(Usuario usuario)
         {
-            string query = "INSERT INTO TB_Usuario (Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol) VALUES (@nombres, @apellidos, @fecnacimiento, @correo, @clave, @id_rol)";
+            string query = "INSERT INTO TB_Usuario (Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol) VALUES (@codigo, @nombres, @apellidos, @fecnacimiento, @correo, @clave, @id_rol)";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@codigo", usuario.Codigo);
                 command.Parameters.AddWithValue("@nombres", usuario.Nombres);
                 command.Parameters.AddWithValue("@apellidos", usuario.Apellidos);
                 command.Parameters.AddWithValue("@fecnacimiento", usuario.FecNacimiento);
@@ -49,7 +51,7 @@ namespace ProjectOPP.Models
 
         public Usuario Login(string correo, string clave, int rol)
         {
-            string query = "SELECT ID, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = @correo and Clave = @clave and ID_Rol = @id_rol";
+            string query = "SELECT ID, Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = @correo and Clave = @clave and ID_Rol = @id_rol";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
@@ -68,12 +70,13 @@ namespace ProjectOPP.Models
                     Usuario usuario = new Usuario
                     {
                         ID = reader.GetInt32(0),
-                        Nombres = reader.GetString(1),
-                        Apellidos = reader.GetString(2),
-                        FecNacimiento = reader.GetDateTime(3),
-                        Correo = reader.GetString(4),
-                        Clave = reader.GetString(5),
-                        ID_Rol = reader.GetInt32(6)
+                        Codigo = reader.GetString(1),
+                        Nombres = reader.GetString(2),
+                        Apellidos = reader.GetString(3),
+                        FecNacimiento = reader.GetDateTime(4),
+                        Correo = reader.GetString(5),
+                        Clave = reader.GetString(6),
+                        ID_Rol = reader.GetInt32(7)
                     };
 
                     reader.Close();
