@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Kernel.Geom;
+using iText.Layout.Element;
 
 namespace ProjectOPP.Models
 {
@@ -103,6 +107,57 @@ namespace ProjectOPP.Models
             }
 
             return lstBean;
+        }
+
+        public Tramite Read(int Id)
+        {
+            string query = "SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, ID_Usuario FROM TB_Tramite WHERE ID = @id";
+
+            using (SqlConnection conn = new SqlConnection(con.connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@id", Id);
+
+                try
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+
+                    Tramite objBean = new Tramite
+                    {
+                        ID = reader.GetInt32(0),
+                        Tramit = reader.GetString(1),
+                        DependenciaReferencia = reader.GetString(2),
+                        NumeroTramite = reader.GetString(3),
+                        FecCreacion = reader.GetDateTime(4),
+                        FundamentoSolicitud = reader.GetString(5),
+                        Usuario = reader.GetInt32(6),
+                    };
+
+                    reader.Close();
+                    conn.Close();
+
+                    return objBean;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error: " + e.Message);
+                }
+            }
+        }
+
+        public void CreatePDF()
+        {
+            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/Downloads/Reporte.pdf");
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDocument, PageSize.A4);
+
+            document.SetMargins(60, 20, 55, 20);
+            var parrafo = new Paragraph("Hola Mundo");
+            document.Add(parrafo);
+            document.Close();
         }
     }
 }

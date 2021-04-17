@@ -23,5 +23,18 @@ namespace ProjectOPP.Controllers
             List<Tramite> lstBean = t.Read();
             return View(lstBean);
         }
+
+        // GET: Default/Details/5
+        public ActionResult Details(int id)
+        {
+            return View(t.Read(id));
+        }
+
+        public ActionResult GeneratePDF(int id)
+        {
+            //List<Tramite> lstBean = t.Read();
+            t.CreatePDF();
+            return View("Index");
+        }
     }
 }
