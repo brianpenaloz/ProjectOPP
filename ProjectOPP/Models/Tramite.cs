@@ -9,6 +9,10 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Kernel.Geom;
 using iText.Layout.Element;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Layout.Properties;
+using iText.IO.Image;
 
 namespace ProjectOPP.Models
 {
@@ -148,16 +152,184 @@ namespace ProjectOPP.Models
             }
         }
 
-        public void CreatePDF()
+        public void CreatePDFTwoDocumentsOriginal()
         {
-            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/Downloads/Reporte.pdf");
+            //C:\Users\brian\source\repos
+            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/Reporte.pdf");
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            // 1 pulgada = 72 pt (Puntos Tipograficos) (8 1/2 x 11 pulgadas) (612 x 792)
+            PageSize tamanhoH = new PageSize(792, 612);
+            Document document = new Document(pdfDocument, PageSize.A4);
+
+            document.SetMargins(60, 20, 55, 20);
+
+            PdfFont pdfFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont pdfFontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            string[] columnas = { "Columna 1", "Columna 2", "Columna 3", "Columna 4", "Columna 5" };
+
+            // Ancho de las columnas
+            float[] tamanhos = { 2, 4, 2, 2, 4 };
+            Table table = new Table(UnitValue.CreatePercentArray(tamanhos));
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            foreach (string columna in columnas)
+            {
+                table.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(pdfFont)));
+            }
+
+            table.AddCell(new Cell().Add(new Paragraph("codigo")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("nombre")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("precio")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("codigo")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("codigo")).SetFont(pdfFontContenido));
+
+            document.Add(table);
+
+            var parrafo = new Paragraph("Hola Mundo");
+            document.Add(parrafo);
+            document.Close();
+
+
+
+
+
+            var logo = new Image(ImageDataFactory.Create("C:/Users/brian/source/repos/ArchivosOPPP/imagen.jpg")).SetWidth(50);
+            var plogo = new Paragraph("").Add(logo);
+
+            var titulo = new Paragraph("Carta de Presentacion");
+            titulo.SetTextAlignment(TextAlignment.CENTER);
+            titulo.SetFontSize(12);
+
+            var dfecha = DateTime.Now.ToString("dd-MM-yyyy");
+            var dhora = DateTime.Now.ToString("hh:mm:ss");
+            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora" + dhora);
+            fecha.SetFontSize(12);
+
+            PdfDocument pdfDocument1 = new PdfDocument(new PdfReader("C:/Users/brian/source/repos/ArchivosOPPP/Reporte.pdf"), new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/ReporteProducto.pdf"));
+            Document document1 = new Document(pdfDocument1);
+
+            int numeros = pdfDocument1.GetNumberOfPages();
+
+            for (int i = 1; i <= numeros; i++)
+            {
+                PdfPage pagina = pdfDocument1.GetPage(i);
+                float y = (pdfDocument1.GetPage(i).GetPageSize().GetTop() - 15);
+
+                document1.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                document1.ShowTextAligned(titulo, 150, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                document1.ShowTextAligned(fecha, 520, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+                document1.ShowTextAligned(new Paragraph(string.Format("Página {0} de {1}", i, numeros)), pdfDocument1.GetPage(i).GetPageSize().GetWidth() / 2, pdfDocument1.GetPage(i).GetPageSize().GetBottom() + 30, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            }
+
+            document1.Close();
+        }
+
+        public void CreatePDFOneDocument()
+        {
+            var danho = DateTime.Now.ToString("yyyy");
+            var dmes = DateTime.Now.ToString("MM");
+            var ddia = DateTime.Now.ToString("dd");
+            var dhora = DateTime.Now.ToString("hh");
+            var dminuto = DateTime.Now.ToString("mm");
+            var dsegundo = DateTime.Now.ToString("ss");
+            var fechacompleta = danho + dmes + ddia + dhora + dminuto + dsegundo;
+
+
+            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/CartaDePresentacion-" + fechacompleta + ".pdf");
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument, PageSize.A4);
 
             document.SetMargins(60, 20, 55, 20);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Encabezado
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            var logo = new Image(ImageDataFactory.Create("C:/Users/brian/source/repos/ArchivosOPPP/imagen.jpg")).SetWidth(50);
+            var plogo = new Paragraph("").Add(logo);
+
+            var titulo = new Paragraph("Carta de Presentacion");
+            titulo.SetTextAlignment(TextAlignment.CENTER);
+            titulo.SetFontSize(12);
+
+            var dfecha = DateTime.Now.ToString("dd-MM-yyyy");
+            var dhorahora = DateTime.Now.ToString("hh:mm:ss");
+            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhorahora);
+            fecha.SetFontSize(12);
+
+
+
+            float y = 827; // (pdfDocument.GetPage(1).GetPageSize().GetTop() - 15);
+
+            document.ShowTextAligned(plogo, 40, y, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            document.ShowTextAligned(titulo, 150, y - 15, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            document.ShowTextAligned(fecha, 520, y - 15, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Contenido
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            PdfFont pdfFontTitulo = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont pdfFontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            string[] columnas = { "Columna 1", "Columna 2", "Columna 3", "Columna 4", "Columna 5" };
+
+            // Ancho de las columnas
+            float[] tamanhos = { 2, 4, 2, 2, 4 };
+            Table table = new Table(UnitValue.CreatePercentArray(tamanhos));
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            foreach (string columna in columnas)
+            {
+                table.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(pdfFontTitulo)));
+            }
+
+            table.AddCell(new Cell().Add(new Paragraph("codigo")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("nombre")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("precio")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("codigo")).SetFont(pdfFontContenido));
+            table.AddCell(new Cell().Add(new Paragraph("codigo")).SetFont(pdfFontContenido));
+
+            document.Add(table);
+
             var parrafo = new Paragraph("Hola Mundo");
             document.Add(parrafo);
+
+            var parrafoOneDocument = new Paragraph("One Document");
+            document.Add(parrafoOneDocument);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Pie de pagina
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            document.ShowTextAligned(new Paragraph(string.Format("Página {0} de {1}", 1, 1)), pdfDocument.GetPage(1).GetPageSize().GetWidth() / 2, pdfDocument.GetPage(1).GetPageSize().GetBottom() + 30, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+
             document.Close();
+
+
+
+
+            //PdfDocument pdfDocument1 = new PdfDocument(new PdfReader("C:/Users/brian/source/repos/ArchivosOPPP/Reporte.pdf"), new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/ReporteProducto.pdf"));
+            //Document document1 = new Document(pdfDocument1);
+
+            //int numeros = pdfDocument1.GetNumberOfPages();
+
+
+
+            //for (int i = 1; i <= numeros; i++)
+            //{
+            //    PdfPage pagina = pdfDocument1.GetPage(i);
+            //    float y = (pdfDocument1.GetPage(i).GetPageSize().GetTop() - 15);
+
+            //    document1.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            //    document1.ShowTextAligned(titulo, 150, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            //    document1.ShowTextAligned(fecha, 520, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+            //    document1.ShowTextAligned(new Paragraph(string.Format("Página {0} de {1}", i, numeros)), pdfDocument1.GetPage(i).GetPageSize().GetWidth() / 2, pdfDocument1.GetPage(i).GetPageSize().GetBottom() + 30, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            //}
+
+            //document1.Close();
         }
     }
 }

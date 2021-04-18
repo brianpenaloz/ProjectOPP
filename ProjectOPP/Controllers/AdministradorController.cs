@@ -32,8 +32,7 @@ namespace ProjectOPP.Controllers
 
         public ActionResult GeneratePDF(int id)
         {
-            //List<Tramite> lstBean = t.Read();
-            t.CreatePDF();
+            t.CreatePDFOneDocument();
             return View("Index");
         }
     }
