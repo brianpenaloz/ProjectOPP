@@ -5,12 +5,14 @@
     Layout = "~/Views/Shared/LayoutEstudiante.cshtml";
 }
 
+
 @if (ViewBag.Message != null)
 {
     <div class="alert alert-success" role="alert">
         @ViewBag.Message
     </div>
 }
+
 
 @using (Html.BeginForm("Tramite", "Estudiante", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -20,7 +22,6 @@
         <h4>Tramite</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
         <div class="form-group">
             @Html.LabelFor(model => model.Tramit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -62,19 +63,77 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(d => d.Archivo1)
-            @Html.TextBoxFor(d => d.Archivo1, new { @class = "form-control", type = "file", accept = ".png" })
-            @Html.ValidationMessageFor(d => d.Archivo1, "", new { @class = "txt-danger" })
+            @Html.LabelFor(model => model.EmpresaNombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmpresaNombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmpresaNombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmpresaRuc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmpresaRuc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmpresaRuc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmpresaDireccion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmpresaDireccion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmpresaDireccion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmpresaJefe, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmpresaJefe, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmpresaJefe, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmpresaCargo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmpresaCargo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmpresaCargo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlumnoCiclo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AlumnoCiclo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AlumnoCiclo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdjuntoUno, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdjuntoUno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdjuntoUno, "", new { @class = "text-danger" })
+            </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(d => d.Archivo2)
-            @Html.TextBoxFor(d => d.Archivo2, new { @class = "form-control", type = "file", accept = ".png" })
-            @Html.ValidationMessageFor(d => d.Archivo2, "", new { @class = "txt-danger" })
+            @Html.LabelFor(model => model.AdjuntoUno)
+            @Html.TextBoxFor(model => model.AdjuntoUno, new { @class = "form-control", type = "file", accept = ".png" })
+            @Html.ValidationMessageFor(model => model.AdjuntoUno, "", new { @class = "txt-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdjuntoDos, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdjuntoDos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdjuntoDos, "", new { @class = "text-danger" })
+            </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(d => d.Cadena)
-            @Html.TextBoxFor(d => d.Cadena, new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.Cadena, "", new { @class = "txt-danger" })
+            @Html.LabelFor(model => model.AdjuntoDos)
+            @Html.TextBoxFor(model => model.AdjuntoDos, new { @class = "form-control", type = "file", accept = ".png" })
+            @Html.ValidationMessageFor(model => model.AdjuntoDos, "", new { @class = "txt-danger" })
         </div>
 
         <div class="form-group">
@@ -86,5 +145,5 @@
 }
 
 @*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

@@ -2183,9 +2183,9 @@
     <Content Include="Views\Estudiante\Index.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
     <Content Include="Views\Shared\LayoutEstudiante.cshtml" />
-    <Content Include="Views\Estudiante\Tramite.cshtml" />
     <Content Include="Views\Administrador\TramiteList.cshtml" />
     <Content Include="Views\Administrador\Details.cshtml" />
+    <Content Include="Views\Estudiante\Tramite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

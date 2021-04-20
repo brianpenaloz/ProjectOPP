@@ -38,8 +38,8 @@ namespace ProjectOPP.Controllers
                 return View("Index", tramite);
             }
 
-            tramite.Archivo1.SaveAs(PathArchivo1);
-            tramite.Archivo2.SaveAs(PathArchivo2);
+            //tramite.Archivo1.SaveAs(PathArchivo1);
+            //tramite.Archivo2.SaveAs(PathArchivo2);
 
             @TempData["Message"] = "Se cargaron los archivos";
             return RedirectToAction("Index");
@@ -70,8 +70,8 @@ namespace ProjectOPP.Controllers
                     return View("Index", tramite);
                 }
 
-                tramite.Archivo1.SaveAs(PathArchivo1);
-                tramite.Archivo2.SaveAs(PathArchivo2);
+                //tramite.Archivo1.SaveAs(PathArchivo1);
+                //tramite.Archivo2.SaveAs(PathArchivo2);
 
                 @TempData["Message"] = "Se cargaron los archivos";
 

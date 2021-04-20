@@ -47,6 +47,14 @@ USE DB_PracticasPre;
 --    NumeroTramite varchar(255),
 --    FecCreacion datetime,
 --	  FundamentoSolicitud varchar(255),
+--	  EmpresaNombre varchar(255),
+--	  EmpresaRuc varchar(255),
+--	  EmpresaDireccion varchar(255),
+--	  EmpresaJefe varchar(255),
+--	  EmpresaCargo varchar(255),
+--	  AlumnoCiclo varchar(255),
+--	  AdjuntoUno varchar(255),
+--	  AdjuntoDos varchar(255),
 --    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID)
 --);
 
@@ -55,8 +63,14 @@ USE DB_PracticasPre;
 --ALTER TABLE TB_Tramite ADD FundamentoSolicitud varchar(255);
 --ALTER TABLE TB_Tramite DROP COLUMN Numero;
 --ALTER TABLE TB_Tramite ADD NumeroTramite varchar(255);
-
-
+--ALTER TABLE TB_Tramite ADD EmpresaNombre varchar(255);
+--ALTER TABLE TB_Tramite ADD EmpresaRuc varchar(255);
+--ALTER TABLE TB_Tramite ADD EmpresaDireccion varchar(255);
+--ALTER TABLE TB_Tramite ADD EmpresaJefe varchar(255);
+--ALTER TABLE TB_Tramite ADD EmpresaCargo varchar(255);
+--ALTER TABLE TB_Tramite ADD AlumnoCiclo varchar(255);
+--ALTER TABLE TB_Tramite ADD AdjuntoUno varchar(255);
+--ALTER TABLE TB_Tramite ADD AdjuntoDos varchar(255);
 
 
 --INSERT INTO TB_Rol
@@ -143,6 +157,22 @@ SELECT TOP (1000) [ID]
       ,[ID_Usuario]
   FROM [DB_PracticasPre].[dbo].[TB_Tramite];
 
+SELECT TOP (1000) [ID]
+      ,[Tramite]
+      ,[DependenciaReferencia]
+      ,[NumeroTramite]
+      ,[FecCreacion]
+      ,[FundamentoSolicitud]
+      ,[EmpresaNombre]
+      ,[EmpresaRuc]
+      ,[EmpresaDireccion]
+      ,[EmpresaJefe]
+      ,[EmpresaCargo]
+      ,[AlumnoCiclo]
+      ,[AdjuntoUno]
+      ,[AdjuntoDos]
+	  ,[ID_Usuario]
+  FROM [DB_PracticasPre].[dbo].[TB_Tramite];
     
 	
 --DELETE FROM TB_Tramite WHERE ID = 4
