@@ -5,6 +5,12 @@
 
 USE DB_PracticasPre;
 
+--CREATE TABLE TB_Estado (
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Nombre varchar(255),
+--    Tabla varchar(255)
+--);
+
 --CREATE TABLE TB_Rol (
 --    ID int PRIMARY KEY IDENTITY(1,1),
 --    Nombre varchar(255)
@@ -71,7 +77,15 @@ USE DB_PracticasPre;
 --ALTER TABLE TB_Tramite ADD AlumnoCiclo varchar(255);
 --ALTER TABLE TB_Tramite ADD AdjuntoUno varchar(255);
 --ALTER TABLE TB_Tramite ADD AdjuntoDos varchar(255);
+--ALTER TABLE TB_Tramite ADD ID_Estado int;
+--ALTER TABLE TB_Tramite ADD FOREIGN KEY (ID_Estado) REFERENCES TB_Estado(ID);
 
+
+--INSERT INTO TB_Estado
+--  ( Nombre, Tabla)
+--VALUES
+--  ('Pendiente', 'TB_Tramite'), 
+--  ('Tramitado', 'TB_Tramite');
 
 --INSERT INTO TB_Rol
 --  ( Nombre)
@@ -119,6 +133,10 @@ USE DB_PracticasPre;
 
 
 
+SELECT TOP (1000) [ID]
+      ,[Nombre]
+	  ,[Tabla]
+  FROM [DB_PracticasPre].[dbo].[TB_Estado];
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
@@ -172,6 +190,7 @@ SELECT TOP (1000) [ID]
       ,[AdjuntoUno]
       ,[AdjuntoDos]
 	  ,[ID_Usuario]
+	  ,[ID_Estado]
   FROM [DB_PracticasPre].[dbo].[TB_Tramite];
     
 	
@@ -180,3 +199,6 @@ SELECT TOP (1000) [ID]
 --SELECT ID, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = '2013016328@unfv.edu.pe' AND Clave = 123 AND ID_Rol = 1;
 --SELECT TOP 1 ID FROM TB_Usuario ORDER BY ID DESC
 --UPDATE TB_Usuario SET Codigo = '2013016328' WHERE ID in (2, 3, 4);
+--SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario FROM TB_Tramite
+--UPDATE TB_Tramite SET EmpresaNombre = 'BCP', EmpresaRuc = '1234567890', EmpresaDireccion = 'AV La Molina', EmpresaJefe = 'Gerardo', EmpresaCargo = 'Gerente', AlumnoCiclo = '9', AdjuntoUno = 'path1', AdjuntoDos = 'path2' WHERE ID in (8, 9, 10, 11, 12, 13);
+--UPDATE TB_Tramite SET ID_Estado = 1;

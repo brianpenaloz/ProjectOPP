@@ -55,7 +55,9 @@ namespace ProjectOPP.Controllers
         {
             try
             {
-                tramite.Usuario = ((Usuario)Session["User"]).ID;
+                tramite.ID_Usuario = ((Usuario)Session["User"]).ID;
+                tramite.ID_Estado = 1;
+                tramite.Tramit = "CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL";
                 t.Create(tramite);
 
 

@@ -23,7 +23,7 @@ namespace ProjectOPP.Models
 
         public void Logup(Usuario usuario)
         {
-            string query = "INSERT INTO TB_Usuario (Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol) VALUES (@codigo, @nombres, @apellidos, @fecnacimiento, @correo, @clave, @id_rol)";
+            string query = "INSERT INTO TB_Usuario (Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol) VALUES (@codigo, @nombres, @apellidos, @fecnacimiento, @correo, @clave, @rol)";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
@@ -34,7 +34,7 @@ namespace ProjectOPP.Models
                 command.Parameters.AddWithValue("@fecnacimiento", usuario.FecNacimiento);
                 command.Parameters.AddWithValue("@correo", usuario.Correo);
                 command.Parameters.AddWithValue("@clave", usuario.Clave);
-                command.Parameters.AddWithValue("@id_rol", usuario.ID_Rol);
+                command.Parameters.AddWithValue("@rol", usuario.ID_Rol);
 
                 try
                 {
@@ -51,14 +51,14 @@ namespace ProjectOPP.Models
 
         public Usuario Login(string correo, string clave, int rol)
         {
-            string query = "SELECT ID, Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = @correo and Clave = @clave and ID_Rol = @id_rol";
+            string query = "SELECT ID, Codigo, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = @correo and Clave = @clave and ID_Rol = @rol";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
                 command.Parameters.AddWithValue("@correo", correo.Trim());
                 command.Parameters.AddWithValue("@clave", clave.Trim());
-                command.Parameters.AddWithValue("@id_rol", rol);
+                command.Parameters.AddWithValue("@rol", rol);
 
                 try
                 {
