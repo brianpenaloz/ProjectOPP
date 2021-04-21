@@ -5,6 +5,18 @@
 
 USE DB_PracticasPre;
 
+--ALTER TABLE TB_ ADD ID_ int;
+--ALTER TABLE TB_ ADD FOREIGN KEY (ID_) REFERENCES TB_(ID);
+--ALTER TABLE TB_ DROP COLUMN ;
+--UPDATE TB_ SET  =  WHERE ID in ();
+--SELECT  FROM TB_;
+--DELETE FROM TB_ WHERE ID in ();
+--SELECT TOP 1 ID FROM TB_ ORDER BY ID DESC
+
+
+
+
+
 --CREATE TABLE TB_Estado (
 --    ID int PRIMARY KEY IDENTITY(1,1),
 --    Nombre varchar(255),
@@ -41,11 +53,8 @@ USE DB_PracticasPre;
 --CREATE TABLE TB_Escuela (
 --    ID int PRIMARY KEY IDENTITY(1,1),
 --    Nombre varchar(255),
---	  ID_Facultad int
+--	  ID_Facultad int FOREIGN KEY REFERENCES TB_Facultad(ID)
 --);
-
---ALTER TABLE TB_Escuela ADD ID_Facultad int;
---ALTER TABLE TB_Escuela ADD FOREIGN KEY (ID_Facultad) REFERENCES TB_Facultad(ID);
 
 --CREATE TABLE TB_Departamento (
 --    ID int PRIMARY KEY IDENTITY(1,1),
@@ -54,19 +63,15 @@ USE DB_PracticasPre;
 
 --CREATE TABLE TB_Provincia (
 --    ID int PRIMARY KEY IDENTITY(1,1),
---    Nombre varchar(255)
+--    Nombre varchar(255),
+--	  ID_Departamento int FOREIGN KEY REFERENCES TB_Departamento(ID)
 --);
-
---ALTER TABLE TB_Provincia ADD ID_Departamento int;
---ALTER TABLE TB_Provincia ADD FOREIGN KEY (ID_Departamento) REFERENCES TB_Departamento(ID);
 
 --CREATE TABLE TB_Distrito (
 --    ID int PRIMARY KEY IDENTITY(1,1),
---    Nombre varchar(255)
+--    Nombre varchar(255),
+--	  ID_Provincia int FOREIGN KEY REFERENCES TB_Provincia(ID)
 --);
-
---ALTER TABLE TB_Distrito ADD ID_Provincia int;
---ALTER TABLE TB_Distrito ADD FOREIGN KEY (ID_Provincia) REFERENCES TB_Provincia(ID);
 
 --CREATE TABLE TB_Usuario (
 --    ID int PRIMARY KEY IDENTITY(1,1),
@@ -87,21 +92,6 @@ USE DB_PracticasPre;
 --    ID_Distrito int FOREIGN KEY REFERENCES TB_Distrito(ID)
 --);
 
---ALTER TABLE TB_Usuario ADD Codigo varchar(255);
---ALTER TABLE TB_Usuario ADD NumeroDocumento varchar(255);
---ALTER TABLE TB_Usuario ADD ApellidoPaterno varchar(255);
---ALTER TABLE TB_Usuario ADD ApellidoMaterno varchar(255);
---ALTER TABLE TB_Usuario ADD Direccion varchar(255);
---ALTER TABLE TB_Usuario ADD NumeroDireccion varchar(255);
---ALTER TABLE TB_Usuario ADD TelefonoFijo varchar(255);
---ALTER TABLE TB_Usuario ADD Celular varchar(255);
-ALTER TABLE TB_Usuario ADD ID_Escuela int;
-ALTER TABLE TB_Usuario ADD ID_Distrito int;
---ALTER TABLE TB_Usuario DROP COLUMN Apellidos;
---ALTER TABLE TB_Usuario DROP COLUMN Escuela;
---ALTER TABLE TB_Usuario DROP COLUMN Distrito;
-
-
 --CREATE TABLE TB_Tramite (
 --    ID int PRIMARY KEY IDENTITY(1,1),
 --	  Tramite varchar(255),
@@ -117,24 +107,9 @@ ALTER TABLE TB_Usuario ADD ID_Distrito int;
 --	  AlumnoCiclo varchar(255),
 --	  AdjuntoUno varchar(255),
 --	  AdjuntoDos varchar(255),
---    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID)
+--    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID),
+--    ID_Estado int FOREIGN KEY REFERENCES TB_Estado(ID)
 --);
-
---ALTER TABLE TB_Tramite ADD Tramite varchar(255);
---ALTER TABLE TB_Tramite ADD DependenciaReferencia varchar(255);
---ALTER TABLE TB_Tramite ADD FundamentoSolicitud varchar(255);
---ALTER TABLE TB_Tramite DROP COLUMN Numero;
---ALTER TABLE TB_Tramite ADD NumeroTramite varchar(255);
---ALTER TABLE TB_Tramite ADD EmpresaNombre varchar(255);
---ALTER TABLE TB_Tramite ADD EmpresaRuc varchar(255);
---ALTER TABLE TB_Tramite ADD EmpresaDireccion varchar(255);
---ALTER TABLE TB_Tramite ADD EmpresaJefe varchar(255);
---ALTER TABLE TB_Tramite ADD EmpresaCargo varchar(255);
---ALTER TABLE TB_Tramite ADD AlumnoCiclo varchar(255);
---ALTER TABLE TB_Tramite ADD AdjuntoUno varchar(255);
---ALTER TABLE TB_Tramite ADD AdjuntoDos varchar(255);
---ALTER TABLE TB_Tramite ADD ID_Estado int;
---ALTER TABLE TB_Tramite ADD FOREIGN KEY (ID_Estado) REFERENCES TB_Estado(ID);
 
 
 
@@ -198,48 +173,43 @@ ALTER TABLE TB_Usuario ADD ID_Distrito int;
 --  ('LIMA');
 
 --INSERT INTO TB_Provincia
---  ( Nombre)
+--  ( Nombre, ID_Departamento)
 --VALUES
---  ('CALLAO'), 
---  ('BARRANCA'), 
---  ('CAJATAMBO'), 
---  ('CANTA'), 
---  ('CAÑETE'), 
---  ('HUARAL'), 
---  ('HUAROCHIRI'), 
---  ('HUAURA'), 
---  ('LIMA'), 
---  ('OYON'), 
---  ('YAUYOS');
+--  ('CALLAO', 1), 
+--  ('BARRANCA', 2), 
+--  ('CAJATAMBO', 2), 
+--  ('CANTA', 2), 
+--  ('CAÑETE', 2), 
+--  ('HUARAL', 2), 
+--  ('HUAROCHIRI', 2), 
+--  ('HUAURA', 2), 
+--  ('LIMA', 2), 
+--  ('OYON', 2), 
+--  ('YAUYOS', 2);
 
 --INSERT INTO TB_Distrito
---  ( Nombre)
+--  ( Nombre, ID_Provincia)
 --VALUES
---  ('BELLAVISTA'), 
---  ('CALLAO'), 
---  ('CARMEN DE LA LEGUA-REYNOSO'), 
---  ('LA PERLA'), 
---  ('LA PUNTA'), 
---  ('VENTANILLA');
+--  ('BELLAVISTA', 1), 
+--  ('CALLAO', 1), 
+--  ('CARMEN DE LA LEGUA-REYNOSO', 1), 
+--  ('LA PERLA', 1), 
+--  ('LA PUNTA', 1), 
+--  ('VENTANILLA', 1);
 
 --INSERT INTO TB_Usuario
 --  ( NumeroDocumento, Nombres, ApellidoPaterno, ApellidoMaterno, FecNacimiento, Direccion, NumeroDireccion, TelefonoFijo, Celular, Codigo, Correo, Clave, ID_Rol, ID_Escuela, ID_Distrito)
 --VALUES
---  ( '12345678', 'Martin', 'Gavino', 'Ramos', '1995-04-17', 'martin@unfv.edu.pe', 123, 1),
---  ( '12345678', 'Brian', 'Peñaloza', 'Ortega', '1995-04-17', '2013016328@unfv.edu.pe', 123, 2),
---  ( '12345678', 'Axel', 'Carhuatocto'. Carhuatocto, '1995-04-17', '2014123456@unfv.edu.pe', 123, 2), 
---  ( '12345678', 'Isabelle', 'Cabrejos', 'Caldas', '1995-04-17', '2014987147@unfv.edu.pe', 123, 2);
-
---UPDATE TB_Usuario SET Codigo = '2013016328' WHERE ID in (2, 3, 4);
+--  ( '12345678', 'Martin', 'Gavino', 'Ramos', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', 'martin@unfv.edu.pe', 123, 1, 2, 6),
+--  ( '12345678', 'Brian', 'Peñaloza', 'Ortega', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2013016328@unfv.edu.pe', 123, 2, 2, 6),
+--  ( '12345678', 'Axel', 'Carhuatocto'. Carhuatocto, '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014123456@unfv.edu.pe', 123, 2, 2, 6),
+--  ( '12345678', 'Isabelle', 'Cabrejos', 'Caldas', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014987147@unfv.edu.pe', 123, 2, 2, 6);
 
 --INSERT INTO TB_Tramite
---  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, ID_Usuario)
+--  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, ID_Usuario, ID_Estado)
 --VALUES
---  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'FIIS', '00001', CURRENT_TIMESTAMP, 'Este es el fundamento', 2),
---  ('CONSTANCIA DE PRACTICAS PRE-PROFESIONALES', 'FIIS', '00002', CURRENT_TIMESTAMP, 'Este es el fundamento', 2);
-
---UPDATE TB_Tramite SET EmpresaNombre = 'BCP', EmpresaRuc = '1234567890', EmpresaDireccion = 'AV La Molina', EmpresaJefe = 'Gerardo', EmpresaCargo = 'Gerente', AlumnoCiclo = '9', AdjuntoUno = 'path1', AdjuntoDos = 'path2' WHERE ID in (8, 9, 10, 11, 12, 13);
---UPDATE TB_Tramite SET ID_Estado = 1;
+--  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'FIIS', '00001', CURRENT_TIMESTAMP, 'Este es el fundamento', 2, 1),
+--  ('CONSTANCIA DE PRACTICAS PRE-PROFESIONALES', 'FIIS', '00002', CURRENT_TIMESTAMP, 'Este es el fundamento', 2, 1);
 
 
 
@@ -269,13 +239,44 @@ SELECT TOP (1000) [ID]
   FROM [DB_PracticasPre].[dbo].[TB_Detalle_Rol_Modulo_Operacion];
 
 SELECT TOP (1000) [ID]
-	  ,[Codigo]
+      ,[Nombre]
+  FROM [DB_PracticasPre].[dbo].[TB_Facultad]
+
+SELECT TOP (1000) [ID]
+      ,[Nombre]
+      ,[ID_Facultad]
+  FROM [DB_PracticasPre].[dbo].[TB_Escuela]
+
+SELECT TOP (1000) [ID]
+      ,[Nombre]
+  FROM [DB_PracticasPre].[dbo].[TB_Departamento]
+
+SELECT TOP (1000) [ID]
+      ,[Nombre]
+      ,[ID_Departamento]
+  FROM [DB_PracticasPre].[dbo].[TB_Provincia]
+
+SELECT TOP (1000) [ID]
+      ,[Nombre]
+      ,[ID_Provincia]
+  FROM [DB_PracticasPre].[dbo].[TB_Distrito]
+
+SELECT TOP (1000) [ID]
+	  ,[NumeroDocumento]
       ,[Nombres]
-      ,[Apellidos]
+      ,[ApellidoPaterno]
+	  ,[ApellidoMaterno]
       ,[FecNacimiento]
+	  ,[Direccion]
+	  ,[NumeroDireccion]
+	  ,[TelefonoFijo]
+	  ,[Celular]
+	  ,[Codigo]
 	  ,[Correo]
       ,[Clave]
       ,[ID_Rol]
+	  ,[ID_Escuela]
+	  ,[ID_Distrito]
   FROM [DB_PracticasPre].[dbo].[TB_Usuario];
 
 SELECT TOP (1000) [ID]
@@ -295,9 +296,9 @@ SELECT TOP (1000) [ID]
 	  ,[ID_Usuario]
 	  ,[ID_Estado]
   FROM [DB_PracticasPre].[dbo].[TB_Tramite];
-    
-	
---DELETE FROM TB_Tramite WHERE ID = 4
---SELECT ID, Nombres, Apellidos, FecNacimiento, Correo, Clave, ID_Rol FROM TB_Usuario WHERE Correo = '2013016328@unfv.edu.pe' AND Clave = 123 AND ID_Rol = 1;
---SELECT TOP 1 ID FROM TB_Usuario ORDER BY ID DESC
---SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario FROM TB_Tramite
+
+
+
+
+
+
