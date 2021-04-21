@@ -53,36 +53,42 @@ namespace ProjectOPP.Controllers
         [HttpPost]
         public ActionResult Tramite(Tramite tramite)
         {
+            DateTime FechaActual = DateTime.UtcNow;
+            TimeZoneInfo serverZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(FechaActual, serverZone);
+
             try
             {
+                tramite.Tramit = "CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL";
+                tramite.DependenciaReferencia = "ESPECIALIDAD DE INGENIERIA DE SISTEMAS";
+                tramite.NumeroTramite = t.NuevoTramite().ToString();
+                tramite.FecCreacion = currentDateTime;
                 tramite.ID_Usuario = ((Usuario)Session["User"]).ID;
                 tramite.ID_Estado = 1;
-                tramite.Tramit = "CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL";
-                tramite.DependenciaReferencia = "Facultad de Ingenieria Industrial y de Sistemas";
-                t.Create(tramite);
 
+                //string RutaSitio = Server.MapPath("~/");
+                //string codigoUsuario = ((Usuario)Session["User"]).Codigo;
+                //string PathArchivo1 = Path.Combine(RutaSitio + "/Tramites/" + codigoUsuario + ".png");
+                //string PathArchivo2 = Path.Combine(RutaSitio + "/Tramites/archivo2.png");
 
-
-                string RutaSitio = Server.MapPath("~/");
-                string codigoUsuario = ((Usuario)Session["User"]).Codigo;
-                string PathArchivo1 = Path.Combine(RutaSitio + "/Tramites/" + codigoUsuario + ".png");
-                string PathArchivo2 = Path.Combine(RutaSitio + "/Tramites/archivo2.png");
-
-                if (!ModelState.IsValid)
-                {
-                    return View("Index", tramite);
-                }
+                //if (!ModelState.IsValid)
+                //{
+                //    return View("Index", tramite);
+                //}
 
                 //tramite.Archivo1.SaveAs(PathArchivo1);
                 //tramite.Archivo2.SaveAs(PathArchivo2);
 
-                @TempData["Message"] = "Se cargaron los archivos";
+                //@TempData["Message"] = "Se cargaron los archivos";
 
+                tramite.AdjuntoUno = "AdjuntoUno";
+                tramite.AdjuntoDos = "AdjuntoDos";
 
+                t.Create(tramite);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }

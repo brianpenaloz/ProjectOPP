@@ -194,6 +194,37 @@ namespace ProjectOPP.Models
             }
         }
 
+        public int NuevoTramite()
+        {
+            string query = "SELECT TOP 1 ID FROM TB_Tramite ORDER BY ID DESC";
+            int ultimoTramite = 0;
+
+            using (SqlConnection conn = new SqlConnection(con.connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+
+                try
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+
+                    ultimoTramite = reader.GetInt32(0);
+
+                    reader.Close();
+                    conn.Close();
+
+                    return ultimoTramite + 1;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error: " + e.Message);
+                }
+            }
+        }
+
+
         public void CreatePDFTwoDocumentsOriginal()
         {
             //C:\Users\brian\source\repos

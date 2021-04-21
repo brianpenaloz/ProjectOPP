@@ -35,24 +35,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DependenciaReferencia, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DependenciaReferencia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.DependenciaReferencia, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @Value = "ESPECIALIDAD DE INGENIERIA DE SISTEMAS" } })
             @Html.ValidationMessageFor(model => model.DependenciaReferencia, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.NumeroTramite, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NumeroTramite, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NumeroTramite, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.FecCreacion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FecCreacion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FecCreacion, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -120,9 +104,11 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.AdjuntoUno)
-        @Html.TextBoxFor(model => model.AdjuntoUno, new { @class = "form-control", type = "file", accept = ".png" })
-        @Html.ValidationMessageFor(model => model.AdjuntoUno, "", new { @class = "txt-danger" })
+        @Html.LabelFor(model => model.AdjuntoUno, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.AdjuntoUno, new { @class = "form-control", type = "file", accept = ".png" })
+            @Html.ValidationMessageFor(model => model.AdjuntoUno, "", new { @class = "txt-danger" })
+        </div>
     </div>
 
     <div class="form-group">
@@ -133,9 +119,11 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.AdjuntoDos)
-        @Html.TextBoxFor(model => model.AdjuntoDos, new { @class = "form-control", type = "file", accept = ".png" })
-        @Html.ValidationMessageFor(model => model.AdjuntoDos, "", new { @class = "txt-danger" })
+        @Html.LabelFor(model => model.AdjuntoDos, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.AdjuntoDos, new { @class = "form-control", type = "file", accept = ".png" })
+            @Html.ValidationMessageFor(model => model.AdjuntoDos, "", new { @class = "txt-danger" })
+        </div>
     </div>
 
     <div class="form-group">

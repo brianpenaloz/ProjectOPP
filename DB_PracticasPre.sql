@@ -220,10 +220,10 @@ USE DB_PracticasPre;
 --  ( '12345678', 'Isabelle', 'Cabrejos', 'Caldas', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014987147@unfv.edu.pe', '123', 1, 6, 2, 2);
 
 --INSERT INTO TB_Tramite
---  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, ID_Usuario, ID_Estado)
+--  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_Estado)
 --VALUES
---  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'FIIS', '00001', CURRENT_TIMESTAMP, 'Este es el fundamento', 2, 1),
---  ('CONSTANCIA DE PRACTICAS PRE-PROFESIONALES', 'FIIS', '00002', CURRENT_TIMESTAMP, 'Este es el fundamento', 2, 1);
+--  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'ESPECIALIDAD DE INGENIERIA DE SISTEMAS', '1', GETDATE(), 'A razon de realizar mis practicas pre profesionales en la empresa BCP', 'BCP', '12345678901', 'AV La Molina 123', 'Carlos Paredes', 'Gerente General', '9no', 'AdjuntoUno', 'AdjuntoDos', 2, 1),
+--  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'ESPECIALIDAD DE INGENIERIA DE SISTEMAS', '2', CURRENT_TIMESTAMP, 'A razon de realizar mis practicas pre profesionales en la empresa',  'BCP', '12345678901', 'AV La Molina 123', 'Carlos Paredes', 'Gerente General', '10mo', 'AdjuntoUno', 'AdjuntoDos', 3, 1);
 
 
 
@@ -254,30 +254,30 @@ SELECT TOP (1000) [ID]
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
-  FROM [DB_PracticasPre].[dbo].[TB_Facultad]
+  FROM [DB_PracticasPre].[dbo].[TB_Facultad];
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
       ,[ID_Facultad]
-  FROM [DB_PracticasPre].[dbo].[TB_Escuela]
+  FROM [DB_PracticasPre].[dbo].[TB_Escuela];
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
-  FROM [DB_PracticasPre].[dbo].[TB_Departamento]
+  FROM [DB_PracticasPre].[dbo].[TB_Departamento];
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
       ,[ID_Departamento]
-  FROM [DB_PracticasPre].[dbo].[TB_Provincia]
+  FROM [DB_PracticasPre].[dbo].[TB_Provincia];
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
       ,[ID_Provincia]
-  FROM [DB_PracticasPre].[dbo].[TB_Distrito]
+  FROM [DB_PracticasPre].[dbo].[TB_Distrito];
 
 SELECT TOP (1000) [ID]
       ,[Nombre]
-  FROM [DB_PracticasPre].[dbo].[TB_TipoDocumento]
+  FROM [DB_PracticasPre].[dbo].[TB_TipoDocumento];
 
 SELECT TOP (1000) [ID]
 	  ,[NumeroDocumento]
