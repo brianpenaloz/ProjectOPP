@@ -58,6 +58,7 @@ namespace ProjectOPP.Controllers
                 tramite.ID_Usuario = ((Usuario)Session["User"]).ID;
                 tramite.ID_Estado = 1;
                 tramite.Tramit = "CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL";
+                tramite.DependenciaReferencia = "Facultad de Ingenieria Industrial y de Sistemas";
                 t.Create(tramite);
 
 

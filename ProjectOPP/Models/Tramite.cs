@@ -39,11 +39,17 @@ namespace ProjectOPP.Models
         public DateTime FecCreacion { get; set; }
         [DisplayName("Fundamento de Solicitud")]
         public string FundamentoSolicitud { get; set; }
+        [DisplayName("Nombre de la Empresa")]
         public string EmpresaNombre { get; set; }
+        [DisplayName("RUC de la Empresa")]
         public string EmpresaRuc { get; set; }
+        [DisplayName("Direccion de la Empresa")]
         public string EmpresaDireccion { get; set; }
+        [DisplayName("Jefe Directo")]
         public string EmpresaJefe { get; set; }
+        [DisplayName("Cargo del Jefe Directo")]
         public string EmpresaCargo { get; set; }
+        [DisplayName("Ciclo que actualmente esta cursando")]
         public string AlumnoCiclo { get; set; }
         public string AdjuntoUno { get; set; }
         public string AdjuntoDos { get; set; }
