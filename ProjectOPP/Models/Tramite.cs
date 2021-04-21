@@ -61,15 +61,14 @@ namespace ProjectOPP.Models
         public void Create(Tramite tramite)
         {
             string query = "INSERT INTO TB_Tramite (Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_Estado) " +
-                "VALUES (@tramite, @dependencia, @numero, @fecha, @fundamento, @empresanombre, @empresaruc, @empresadireccion, @empresajefe, @empresacargo, @alumnociclo, @adjuntouno, @adjuntodos, @usuario, @estado)";
-            //string query = "insert into tb_tramite (Numero, ID_Usuario) values (@numero, @usuario)";
+                "VALUES (@tramite, @dependencia, @numerotramite, @fecha, @fundamento, @empresanombre, @empresaruc, @empresadireccion, @empresajefe, @empresacargo, @alumnociclo, @adjuntouno, @adjuntodos, @usuario, @estado)";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
                 command.Parameters.AddWithValue("@tramite", tramite.Tramit);
                 command.Parameters.AddWithValue("@dependencia", tramite.DependenciaReferencia);
-                command.Parameters.AddWithValue("@numero", tramite.NumeroTramite);
+                command.Parameters.AddWithValue("@numerotramite", tramite.NumeroTramite);
                 command.Parameters.AddWithValue("@fecha", tramite.FecCreacion);
                 command.Parameters.AddWithValue("@fundamento", tramite.FundamentoSolicitud);
                 command.Parameters.AddWithValue("@empresanombre", tramite.EmpresaNombre);

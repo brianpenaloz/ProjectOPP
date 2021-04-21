@@ -73,6 +73,11 @@ USE DB_PracticasPre;
 --	  ID_Provincia int FOREIGN KEY REFERENCES TB_Provincia(ID)
 --);
 
+--CREATE TABLE TB_TipoDocumento (
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Nombre varchar(255)
+--);
+
 --CREATE TABLE TB_Usuario (
 --    ID int PRIMARY KEY IDENTITY(1,1),
 --	  NumeroDocumento varchar(255),
@@ -87,9 +92,10 @@ USE DB_PracticasPre;
 --    Codigo varchar(255),
 --    Correo varchar(255),
 --    Clave varchar(255),
---    ID_Rol int FOREIGN KEY REFERENCES TB_Rol(ID)
+--    ID_TipoDocumento int FOREIGN KEY REFERENCES TB_TipoDocumento(ID),
+--    ID_Distrito int FOREIGN KEY REFERENCES TB_Distrito(ID),
+--    ID_Rol int FOREIGN KEY REFERENCES TB_Rol(ID),
 --    ID_Escuela int FOREIGN KEY REFERENCES TB_Escuela(ID)
---    ID_Distrito int FOREIGN KEY REFERENCES TB_Distrito(ID)
 --);
 
 --CREATE TABLE TB_Tramite (
@@ -197,13 +203,21 @@ USE DB_PracticasPre;
 --  ('LA PUNTA', 1), 
 --  ('VENTANILLA', 1);
 
---INSERT INTO TB_Usuario
---  ( NumeroDocumento, Nombres, ApellidoPaterno, ApellidoMaterno, FecNacimiento, Direccion, NumeroDireccion, TelefonoFijo, Celular, Codigo, Correo, Clave, ID_Rol, ID_Escuela, ID_Distrito)
+--INSERT INTO TB_TipoDocumento
+--  ( Nombre)
 --VALUES
---  ( '12345678', 'Martin', 'Gavino', 'Ramos', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', 'martin@unfv.edu.pe', 123, 1, 2, 6),
---  ( '12345678', 'Brian', 'Peñaloza', 'Ortega', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2013016328@unfv.edu.pe', 123, 2, 2, 6),
---  ( '12345678', 'Axel', 'Carhuatocto'. Carhuatocto, '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014123456@unfv.edu.pe', 123, 2, 2, 6),
---  ( '12345678', 'Isabelle', 'Cabrejos', 'Caldas', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014987147@unfv.edu.pe', 123, 2, 2, 6);
+--  ('DNI'), 
+--  ('PASAPORTE'), 
+--  ('CARNE DE EXTRANJERIA'), 
+--  ('RUC');
+
+--INSERT INTO TB_Usuario
+--  ( NumeroDocumento, Nombres, ApellidoPaterno, ApellidoMaterno, FecNacimiento, Direccion, NumeroDireccion, TelefonoFijo, Celular, Codigo, Correo, Clave, ID_TipoDocumento, ID_Distrito, ID_Rol, ID_Escuela)
+--VALUES
+--  ( '12345678', 'Martin', 'Gavino', 'Ramos', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', 'martin@unfv.edu.pe', '123', 1, 6, 1, 2),
+--  ( '12345678', 'Brian', 'Peñaloza', 'Ortega', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2013016328@unfv.edu.pe', '123', 1, 6, 2, 2),
+--  ( '12345678', 'Axel', 'Carhuatocto'. Carhuatocto, '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014123456@unfv.edu.pe', '123', 1, 6, 2, 2),
+--  ( '12345678', 'Isabelle', 'Cabrejos', 'Caldas', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014987147@unfv.edu.pe', '123', 1, 6, 2, 2);
 
 --INSERT INTO TB_Tramite
 --  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, ID_Usuario, ID_Estado)
@@ -262,6 +276,10 @@ SELECT TOP (1000) [ID]
   FROM [DB_PracticasPre].[dbo].[TB_Distrito]
 
 SELECT TOP (1000) [ID]
+      ,[Nombre]
+  FROM [DB_PracticasPre].[dbo].[TB_TipoDocumento]
+
+SELECT TOP (1000) [ID]
 	  ,[NumeroDocumento]
       ,[Nombres]
       ,[ApellidoPaterno]
@@ -274,9 +292,10 @@ SELECT TOP (1000) [ID]
 	  ,[Codigo]
 	  ,[Correo]
       ,[Clave]
+	  ,[ID_TipoDocumento]
+	  ,[ID_Distrito]
       ,[ID_Rol]
 	  ,[ID_Escuela]
-	  ,[ID_Distrito]
   FROM [DB_PracticasPre].[dbo].[TB_Usuario];
 
 SELECT TOP (1000) [ID]
