@@ -19,8 +19,8 @@ namespace ProjectOPP.Models
     public class Tramite
     {
         //[Required]
-        //[DisplayName("Mi archivo")]
-        //public HttpPostedFileBase Archivo1 { get; set; }
+        [DisplayName("Voucher de Pago")]
+        public HttpPostedFileBase ArchivoUno { get; set; }
         //[Required]
         //[DisplayName("Mi archivo2")]
         //public HttpPostedFileBase Archivo2 { get; set; }

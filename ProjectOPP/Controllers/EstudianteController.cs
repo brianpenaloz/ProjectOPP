@@ -69,18 +69,23 @@ namespace ProjectOPP.Controllers
             TimeZoneInfo serverZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
             DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(FechaActual, serverZone);
 
+            string numeroNuevoTramite = t.NuevoTramite().ToString();
+
             try
             {
                 tramite.Tramit = "CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL";
                 tramite.DependenciaReferencia = "ESPECIALIDAD DE INGENIERIA DE SISTEMAS";
-                tramite.NumeroTramite = t.NuevoTramite().ToString();
+                tramite.NumeroTramite = numeroNuevoTramite;
                 tramite.FecCreacion = currentDateTime;
                 tramite.ID_Usuario = ((Usuario)Session["User"]).ID;
                 tramite.ID_Estado = 1;
 
-                //string RutaSitio = Server.MapPath("~/");
-                //string codigoUsuario = ((Usuario)Session["User"]).Codigo;
-                //string PathArchivo1 = Path.Combine(RutaSitio + "/Tramites/" + codigoUsuario + ".png");
+                string nombreCarpeta = numeroNuevoTramite;
+                string RutaSitio = Server.MapPath("~/Tramites/" + nombreCarpeta);
+
+                Directory.CreateDirectory(RutaSitio);
+
+                string PathArchivoUno = Path.Combine(RutaSitio + "/" + "voucherdepago.pdf");
                 //string PathArchivo2 = Path.Combine(RutaSitio + "/Tramites/archivo2.png");
 
                 //if (!ModelState.IsValid)
@@ -88,19 +93,19 @@ namespace ProjectOPP.Controllers
                 //    return View("Index", tramite);
                 //}
 
-                //tramite.Archivo1.SaveAs(PathArchivo1);
+                tramite.ArchivoUno.SaveAs(PathArchivoUno);
                 //tramite.Archivo2.SaveAs(PathArchivo2);
 
                 //@TempData["Message"] = "Se cargaron los archivos";
 
-                tramite.AdjuntoUno = "AdjuntoUno";
+                tramite.AdjuntoUno = "voucherdepago.pdf";
                 tramite.AdjuntoDos = "AdjuntoDos";
 
                 t.Create(tramite);
 
                 return RedirectToAction("Index");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return View();
             }

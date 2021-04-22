@@ -89,22 +89,22 @@
         </div>
     </div>
 
-    <div class="form-group">
+    @*<div class="form-group">
         @Html.LabelFor(model => model.AdjuntoUno, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.AdjuntoUno, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.AdjuntoUno, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
     <div class="form-group">
-        @Html.LabelFor(model => model.AdjuntoUno, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.ArchivoUno, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.AdjuntoUno, new { @class = "form-control", type = "file", accept = ".png" })
-            @Html.ValidationMessageFor(model => model.AdjuntoUno, "", new { @class = "txt-danger" })
+            @Html.TextBoxFor(model => model.ArchivoUno, new { @class = "form-control", type = "file", accept = ".pdf" })
+            @Html.ValidationMessageFor(model => model.ArchivoUno, "", new { @class = "txt-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    @*<div class="form-group">
         @Html.LabelFor(model => model.AdjuntoDos, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.AdjuntoDos, new { htmlAttributes = new { @class = "form-control" } })
@@ -117,7 +117,7 @@
             @Html.TextBoxFor(model => model.AdjuntoDos, new { @class = "form-control", type = "file", accept = ".png" })
             @Html.ValidationMessageFor(model => model.AdjuntoDos, "", new { @class = "txt-danger" })
         </div>
-    </div>
+    </div>*@
 
     @*<div class="form-group">
         @Html.LabelFor(model => model.ID_CicloAlumno, htmlAttributes: new { @class = "control-label col-md-2" })
