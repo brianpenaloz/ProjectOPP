@@ -299,6 +299,10 @@ SELECT TOP (1000) [ID]
   FROM [DB_PracticasPre].[dbo].[TB_TipoDocumento];
 
 SELECT TOP (1000) [ID]
+      ,[Nombre]
+  FROM [DB_PracticasPre].[dbo].[TB_CicloAlumno];
+
+SELECT TOP (1000) [ID]
 	  ,[NumeroDocumento]
       ,[Nombres]
       ,[ApellidoPaterno]
