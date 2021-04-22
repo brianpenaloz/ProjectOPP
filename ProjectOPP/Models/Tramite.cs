@@ -49,19 +49,19 @@ namespace ProjectOPP.Models
         public string EmpresaJefe { get; set; }
         [DisplayName("Cargo del Jefe Directo")]
         public string EmpresaCargo { get; set; }
-        [DisplayName("Ciclo que actualmente esta cursando")]
-        public string AlumnoCiclo { get; set; }
         public string AdjuntoUno { get; set; }
         public string AdjuntoDos { get; set; }
         public int ID_Usuario { get; set; }
+        [DisplayName("Ciclo que actualmente esta cursando")]
+        public int ID_CicloAlumno { get; set; }
         public int ID_Estado { get; set; }
 
         readonly Conexion con = new Conexion();
 
         public void Create(Tramite tramite)
         {
-            string query = "INSERT INTO TB_Tramite (Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_Estado) " +
-                "VALUES (@tramite, @dependencia, @numerotramite, @fecha, @fundamento, @empresanombre, @empresaruc, @empresadireccion, @empresajefe, @empresacargo, @alumnociclo, @adjuntouno, @adjuntodos, @usuario, @estado)";
+            string query = "INSERT INTO TB_Tramite (Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_CicloAlumno, ID_Estado) " +
+                "VALUES (@tramite, @dependencia, @numerotramite, @fecha, @fundamento, @empresanombre, @empresaruc, @empresadireccion, @empresajefe, @empresacargo, @adjuntouno, @adjuntodos, @usuario, @cicloalumno, @estado)";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
@@ -76,10 +76,10 @@ namespace ProjectOPP.Models
                 command.Parameters.AddWithValue("@empresadireccion", tramite.EmpresaDireccion);
                 command.Parameters.AddWithValue("@empresajefe", tramite.EmpresaJefe);
                 command.Parameters.AddWithValue("@empresacargo", tramite.EmpresaCargo);
-                command.Parameters.AddWithValue("@alumnociclo", tramite.AlumnoCiclo);
                 command.Parameters.AddWithValue("@adjuntouno", tramite.AdjuntoUno);
                 command.Parameters.AddWithValue("@adjuntodos", tramite.AdjuntoDos);
                 command.Parameters.AddWithValue("@usuario", tramite.ID_Usuario);
+                command.Parameters.AddWithValue("@cicloalumno", tramite.ID_CicloAlumno);
                 command.Parameters.AddWithValue("@estado", tramite.ID_Estado);
 
                 try
@@ -98,7 +98,7 @@ namespace ProjectOPP.Models
         public List<Tramite> Read()
         {
             List<Tramite> lstBean = new List<Tramite>();
-            string query = "SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_Estado FROM TB_Tramite";
+            string query = "SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_CicloAlumno, ID_Estado FROM TB_Tramite";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
@@ -125,10 +125,10 @@ namespace ProjectOPP.Models
                             EmpresaDireccion = reader.GetString(8),
                             EmpresaJefe = reader.GetString(9),
                             EmpresaCargo = reader.GetString(10),
-                            AlumnoCiclo = reader.GetString(11),
-                            AdjuntoUno = reader.GetString(12),
-                            AdjuntoDos = reader.GetString(13),
-                            ID_Usuario = reader.GetInt32(14),
+                            AdjuntoUno = reader.GetString(11),
+                            AdjuntoDos = reader.GetString(12),
+                            ID_Usuario = reader.GetInt32(13),
+                            ID_CicloAlumno = reader.GetInt32(14),
                             ID_Estado = reader.GetInt32(15)
                         };
                         lstBean.Add(objBean);
@@ -148,7 +148,7 @@ namespace ProjectOPP.Models
 
         public Tramite Read(int id)
         {
-            string query = "SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_Estado FROM TB_Tramite WHERE ID = @id";
+            string query = "SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_CicloAlumno, ID_Estado FROM TB_Tramite WHERE ID = @id";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
@@ -175,10 +175,10 @@ namespace ProjectOPP.Models
                         EmpresaDireccion = reader.GetString(8),
                         EmpresaJefe = reader.GetString(9),
                         EmpresaCargo = reader.GetString(10),
-                        AlumnoCiclo = reader.GetString(11),
-                        AdjuntoUno = reader.GetString(12),
-                        AdjuntoDos = reader.GetString(13),
-                        ID_Usuario = reader.GetInt32(14),
+                        AdjuntoUno = reader.GetString(11),
+                        AdjuntoDos = reader.GetString(12),
+                        ID_Usuario = reader.GetInt32(13),
+                        ID_CicloAlumno = reader.GetInt32(14),
                         ID_Estado = reader.GetInt32(15)
                     };
 

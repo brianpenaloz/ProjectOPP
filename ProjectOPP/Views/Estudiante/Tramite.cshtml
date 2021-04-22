@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Tramite";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
     Layout = "~/Views/Shared/LayoutEstudiante.cshtml";
 }
 
@@ -89,14 +90,6 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.AlumnoCiclo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AlumnoCiclo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AlumnoCiclo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.AdjuntoUno, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.AdjuntoUno, new { htmlAttributes = new { @class = "form-control" } })
@@ -123,6 +116,21 @@
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.AdjuntoDos, new { @class = "form-control", type = "file", accept = ".png" })
             @Html.ValidationMessageFor(model => model.AdjuntoDos, "", new { @class = "txt-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.ID_CicloAlumno, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ID_CicloAlumno, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ID_CicloAlumno, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID_CicloAlumno, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ID_CicloAlumno", items, "Seleccionar", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_CicloAlumno, "", new { @class = "text-danger" })
         </div>
     </div>
 

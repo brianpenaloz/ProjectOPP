@@ -11,6 +11,7 @@ namespace ProjectOPP.Controllers
     public class EstudianteController : Controller
     {
         readonly Tramite t = new Tramite();
+        readonly CicloAlumno ca = new CicloAlumno();
 
         // GET: Estudiante
         public ActionResult Index()
@@ -47,6 +48,17 @@ namespace ProjectOPP.Controllers
 
         public ActionResult Tramite()
         {
+            List<CicloAlumno> lstBean = ca.Read();
+            List<SelectListItem> lst = new List<SelectListItem>();
+            lst = (from d in lstBean
+                       select new SelectListItem
+                       {
+                           Value = d.ID.ToString(),
+                           Text = d.Nombre
+                       }).ToList();
+
+            ViewBag.items = lst;
+
             return View();
         }
 

@@ -10,7 +10,6 @@ namespace ProjectOPP.Models
     public class Rol
     {
         public int ID { get; set; }
-        [DisplayName("Nombre")]
         public string Nombre { get; set; }
     }
 }

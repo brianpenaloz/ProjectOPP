@@ -78,6 +78,11 @@ USE DB_PracticasPre;
 --    Nombre varchar(255)
 --);
 
+--CREATE TABLE TB_CicloAlumno (
+--    ID int PRIMARY KEY IDENTITY(1,1),
+--    Nombre varchar(255)
+--);
+
 --CREATE TABLE TB_Usuario (
 --    ID int PRIMARY KEY IDENTITY(1,1),
 --	  NumeroDocumento varchar(255),
@@ -110,10 +115,10 @@ USE DB_PracticasPre;
 --	  EmpresaDireccion varchar(255),
 --	  EmpresaJefe varchar(255),
 --	  EmpresaCargo varchar(255),
---	  AlumnoCiclo varchar(255),
 --	  AdjuntoUno varchar(255),
 --	  AdjuntoDos varchar(255),
 --    ID_Usuario int FOREIGN KEY REFERENCES TB_Usuario(ID),
+--    ID_CicloAlumno int FOREIGN KEY REFERENCES TB_CicloAlumno(ID),
 --    ID_Estado int FOREIGN KEY REFERENCES TB_Estado(ID)
 --);
 
@@ -211,6 +216,20 @@ USE DB_PracticasPre;
 --  ('CARNE DE EXTRANJERIA'), 
 --  ('RUC');
 
+--INSERT INTO TB_CicloAlumno
+--  ( Nombre)
+--VALUES
+--  ('1er'), 
+--  ('2do'), 
+--  ('3er'), 
+--  ('4to'), 
+--  ('5to'), 
+--  ('6to'), 
+--  ('7mo'), 
+--  ('8vo'), 
+--  ('9no'),  
+--  ('10mo');
+
 --INSERT INTO TB_Usuario
 --  ( NumeroDocumento, Nombres, ApellidoPaterno, ApellidoMaterno, FecNacimiento, Direccion, NumeroDireccion, TelefonoFijo, Celular, Codigo, Correo, Clave, ID_TipoDocumento, ID_Distrito, ID_Rol, ID_Escuela)
 --VALUES
@@ -220,10 +239,10 @@ USE DB_PracticasPre;
 --  ( '12345678', 'Isabelle', 'Cabrejos', 'Caldas', '1995-04-17', 'AV Colonial', '123', '555-5555', '999999999', '1234456', '2014987147@unfv.edu.pe', '123', 1, 6, 2, 2);
 
 --INSERT INTO TB_Tramite
---  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AlumnoCiclo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_Estado)
+--  ( Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_CicloAlumno, ID_Estado)
 --VALUES
---  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'ESPECIALIDAD DE INGENIERIA DE SISTEMAS', '1', GETDATE(), 'A razon de realizar mis practicas pre profesionales en la empresa BCP', 'BCP', '12345678901', 'AV La Molina 123', 'Carlos Paredes', 'Gerente General', '9no', 'AdjuntoUno', 'AdjuntoDos', 2, 1),
---  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'ESPECIALIDAD DE INGENIERIA DE SISTEMAS', '2', CURRENT_TIMESTAMP, 'A razon de realizar mis practicas pre profesionales en la empresa',  'BCP', '12345678901', 'AV La Molina 123', 'Carlos Paredes', 'Gerente General', '10mo', 'AdjuntoUno', 'AdjuntoDos', 3, 1);
+--  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'ESPECIALIDAD DE INGENIERIA DE SISTEMAS', '1', GETDATE(), 'A razon de realizar mis practicas pre profesionales en la empresa BCP', 'BCP', '12345678901', 'AV La Molina 123', 'Carlos Paredes', 'Gerente General', 'AdjuntoUno', 'AdjuntoDos', 2, 10, 1),
+--  ('CARTA DE PRESENTACION - PRACTICA PRE PROFESIONAL', 'ESPECIALIDAD DE INGENIERIA DE SISTEMAS', '2', CURRENT_TIMESTAMP, 'A razon de realizar mis practicas pre profesionales en la empresa',  'BCP', '12345678901', 'AV La Molina 123', 'Carlos Paredes', 'Gerente General', 'AdjuntoUno', 'AdjuntoDos', 3, 10, 1);
 
 
 
@@ -309,15 +328,13 @@ SELECT TOP (1000) [ID]
       ,[EmpresaDireccion]
       ,[EmpresaJefe]
       ,[EmpresaCargo]
-      ,[AlumnoCiclo]
       ,[AdjuntoUno]
       ,[AdjuntoDos]
 	  ,[ID_Usuario]
+	  ,[ID_CicloAlumno]
 	  ,[ID_Estado]
   FROM [DB_PracticasPre].[dbo].[TB_Tramite];
 
 
 
-
-
-
+  
