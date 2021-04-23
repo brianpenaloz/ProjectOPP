@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
@@ -9,6 +11,7 @@ namespace ProjectOPP.Models
     public class CicloAlumno
     {
         public int ID { get; set; }
+        [DisplayName("Ciclo que actualmente esta cursando")]
         public string Nombre { get; set; }
 
         readonly Conexion con = new Conexion();

@@ -90,19 +90,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AdjuntoUno)
+            @Html.DisplayNameFor(model => model.usuario.NumeroDocumento)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AdjuntoUno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AdjuntoDos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AdjuntoDos)
+            @Html.DisplayFor(model => model.usuario.NumeroDocumento)
         </dd>
 
         <dt>
@@ -114,6 +106,38 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.usuario.ApellidoPaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.ApellidoPaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.ApellidoMaterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.ApellidoMaterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.FecNacimiento)
+        </dt>
+
+        <dd>
+            @Html.ValueFor(model => model.usuario.FecNacimiento, "{0:dd/MM/yyyy}")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.Direccion)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.usuario.NumeroDireccion)
         </dt>
 
@@ -122,11 +146,43 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ID_Estado)
+            @Html.DisplayNameFor(model => model.usuario.TelefonoFijo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ID_Estado)
+            @Html.DisplayFor(model => model.usuario.TelefonoFijo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.Celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.Celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.Correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.Correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cicloAlumno.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cicloAlumno.Nombre)
         </dd>
 
     </dl>

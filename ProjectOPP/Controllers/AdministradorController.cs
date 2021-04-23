@@ -36,6 +36,8 @@ namespace ProjectOPP.Controllers
 
         public ActionResult GeneratePDF(int id)
         {
+            ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+
             t.CreatePDFOneDocument(t.Read(id));
             return View("Index");
         }

@@ -58,6 +58,7 @@ namespace ProjectOPP.Models
 
 
         public Usuario usuario;
+        public CicloAlumno cicloAlumno;
 
 
 
@@ -156,10 +157,11 @@ namespace ProjectOPP.Models
         {
             string query = "SELECT " +
                 "T.ID, T.Tramite, T.DependenciaReferencia, T.NumeroTramite, T.FecCreacion, T.FundamentoSolicitud, T.EmpresaNombre, T.EmpresaRuc, T.EmpresaDireccion, T.EmpresaJefe, T.EmpresaCargo, T.AdjuntoUno, T.AdjuntoDos, T.ID_Usuario, T.ID_CicloAlumno, T.ID_Estado, " +
-                "U.ID, U.NumeroDocumento, U.Nombres, U.ApellidoPaterno, U.ApellidoMaterno, U.FecNacimiento, U.Direccion, U.NumeroDireccion, U.TelefonoFijo, U.Celular, U.Codigo, U.Correo, U.Clave, U.ID_TipoDocumento, U.ID_Distrito, U.ID_Rol, U.ID_Escuela " +
+                "U.ID, U.NumeroDocumento, U.Nombres, U.ApellidoPaterno, U.ApellidoMaterno, U.FecNacimiento, U.Direccion, U.NumeroDireccion, U.TelefonoFijo, U.Celular, U.Codigo, U.Correo, U.Clave, U.ID_TipoDocumento, U.ID_Distrito, U.ID_Rol, U.ID_Escuela, " +
+                "CA.ID, CA.Nombre " +
                 "FROM TB_Tramite T " +
-                "INNER JOIN TB_Usuario U " +
-                "ON T.ID_Usuario = U.ID " +
+                "INNER JOIN TB_Usuario U ON T.ID_Usuario = U.ID " +
+                "INNER JOIN TB_CicloAlumno CA ON T.ID_CicloAlumno = CA.ID " +
                 "WHERE T.ID = @id";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
@@ -217,6 +219,15 @@ namespace ProjectOPP.Models
                     };
 
                     objBean.usuario = objBeanRel;
+
+                    CicloAlumno objBeanRelDos = new CicloAlumno
+                    {
+                        ID = reader.GetInt32(33),
+                        Nombre = reader.GetString(34)
+                    };
+
+                    objBean.cicloAlumno = objBeanRelDos;
+
 
                     reader.Close();
                     conn.Close();
@@ -343,6 +354,13 @@ namespace ProjectOPP.Models
             document1.Close();
         }
 
+
+
+
+
+
+
+
         public void CreatePDFOneDocument(Tramite tramite)
         {
             /*
@@ -388,6 +406,8 @@ namespace ProjectOPP.Models
             string dsegundo = currentDateTime.ToString("ss");
             string fechacompleta = danho + dmes + ddia + dhora + dminuto + dsegundo;
 
+            string dmespalabra = currentDateTime.ToString("MMMM");
+
             PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/CartaDePresentacion-" + tramite.usuario.Codigo + "-" + fechacompleta + ".pdf");
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument, PageSize.A4);
@@ -403,7 +423,7 @@ namespace ProjectOPP.Models
 
             Paragraph pimgLogoFIIS = new Paragraph("").Add(imgLogoFIIS);         
 
-            Paragraph universidad = new Paragraph("Univerisdad Nacional");
+            Paragraph universidad = new Paragraph("Universidad Nacional");
             universidad.SetTextAlignment(TextAlignment.CENTER);
             universidad.SetFontSize(12);
 
@@ -419,11 +439,11 @@ namespace ProjectOPP.Models
             OPPP.SetTextAlignment(TextAlignment.CENTER);
             OPPP.SetFontSize(12);
 
-            Paragraph anho = new Paragraph("\"Año de la Universalizacion de la Salud\"");
+            Paragraph anho = new Paragraph("\"Año del Bicentenario del Perú: 200 años de Independencia\"");
             anho.SetTextAlignment(TextAlignment.CENTER);
             anho.SetFontSize(12);
 
-            Paragraph lugarFecha = new Paragraph("Lima, 15 de diciembre del 2020");
+            Paragraph lugarFecha = new Paragraph("Lima, " + ddia + " de " + dmespalabra + " del " + danho);
             lugarFecha.SetTextAlignment(TextAlignment.CENTER);
             lugarFecha.SetFontSize(12);
 
@@ -444,7 +464,7 @@ namespace ProjectOPP.Models
             ///Membrete
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Paragraph carta = new Paragraph("CARTA N° 148-2020-OPPP-FIIS-UNFV");
+            Paragraph carta = new Paragraph("CARTA N° " + tramite.NumeroTramite + "-2021-OPPP-FIIS-UNFV");
             carta.SetTextAlignment(TextAlignment.LEFT);
             carta.SetFontSize(12);
 
@@ -492,11 +512,11 @@ namespace ProjectOPP.Models
             primerParrafo.SetTextAlignment(TextAlignment.JUSTIFIED);
             primerParrafo.SetFontSize(11);
 
-            Paragraph estudiante = new Paragraph(tramite.usuario.Nombres);
+            Paragraph estudiante = new Paragraph(tramite.usuario.ApellidoPaterno.ToUpper() + " " + tramite.usuario.ApellidoMaterno.ToUpper() + ", " +tramite.usuario.Nombres.ToUpper());
             estudiante.SetTextAlignment(TextAlignment.CENTER);
             estudiante.SetFontSize(12);
 
-            Paragraph segundoParrafo = new Paragraph("Estudiante del 9no. Ciclo de Estudios, con Código de Matricula N.º 2014002507 de la \nCarrera Profesional de Ingeniería de Sistemas, y de conformidad con lo establecido en \nla Ley Nº 28518 “Ley de Modalidades Formativas Laborales”, solicitarle le permita \nrealizar sus Prácticas Pre Profesionales en su prestigiosa empresa; para lo cual utilizará \ntodos los conocimientos adquiridos en esta Facultad.");
+            Paragraph segundoParrafo = new Paragraph("Estudiante del " + tramite.cicloAlumno.Nombre + ". Ciclo de Estudios, con Código de Matricula N.º " + tramite.usuario.Codigo + " de la \nCarrera Profesional de Ingeniería de Sistemas, y de conformidad con lo establecido en \nla Ley Nº 28518 “Ley de Modalidades Formativas Laborales”, solicitarle le permita \nrealizar sus Prácticas Pre Profesionales en su prestigiosa empresa; para lo cual utilizará \ntodos los conocimientos adquiridos en esta Facultad.");
             segundoParrafo.SetTextAlignment(TextAlignment.JUSTIFIED);
             segundoParrafo.SetFontSize(11);
 
