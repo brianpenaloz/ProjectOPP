@@ -20,6 +20,8 @@ namespace ProjectOPP.Controllers
 
         public ActionResult TramiteList()
         {
+            ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+
             List<Tramite> lstBean = t.Read();
             return View(lstBean);
         }
@@ -27,12 +29,14 @@ namespace ProjectOPP.Controllers
         // GET: Default/Details/5
         public ActionResult Details(int id)
         {
+            ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+
             return View(t.Read(id));
         }
 
         public ActionResult GeneratePDF(int id)
         {
-            t.CreatePDFOneDocument();
+            t.CreatePDFOneDocument(t.Read(id));
             return View("Index");
         }
     }

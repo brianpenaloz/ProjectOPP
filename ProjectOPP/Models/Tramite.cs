@@ -56,6 +56,12 @@ namespace ProjectOPP.Models
         public int ID_CicloAlumno { get; set; }
         public int ID_Estado { get; set; }
 
+
+        public Usuario usuario;
+
+
+
+
         readonly Conexion con = new Conexion();
 
         public void Create(Tramite tramite)
@@ -148,7 +154,13 @@ namespace ProjectOPP.Models
 
         public Tramite Read(int id)
         {
-            string query = "SELECT ID, Tramite, DependenciaReferencia, NumeroTramite, FecCreacion, FundamentoSolicitud, EmpresaNombre, EmpresaRuc, EmpresaDireccion, EmpresaJefe, EmpresaCargo, AdjuntoUno, AdjuntoDos, ID_Usuario, ID_CicloAlumno, ID_Estado FROM TB_Tramite WHERE ID = @id";
+            string query = "SELECT " +
+                "T.ID, T.Tramite, T.DependenciaReferencia, T.NumeroTramite, T.FecCreacion, T.FundamentoSolicitud, T.EmpresaNombre, T.EmpresaRuc, T.EmpresaDireccion, T.EmpresaJefe, T.EmpresaCargo, T.AdjuntoUno, T.AdjuntoDos, T.ID_Usuario, T.ID_CicloAlumno, T.ID_Estado, " +
+                "U.ID, U.NumeroDocumento, U.Nombres, U.ApellidoPaterno, U.ApellidoMaterno, U.FecNacimiento, U.Direccion, U.NumeroDireccion, U.TelefonoFijo, U.Celular, U.Codigo, U.Correo, U.Clave, U.ID_TipoDocumento, U.ID_Distrito, U.ID_Rol, U.ID_Escuela " +
+                "FROM TB_Tramite T " +
+                "INNER JOIN TB_Usuario U " +
+                "ON T.ID_Usuario = U.ID " +
+                "WHERE T.ID = @id";
 
             using (SqlConnection conn = new SqlConnection(con.connectionString))
             {
@@ -181,6 +193,30 @@ namespace ProjectOPP.Models
                         ID_CicloAlumno = reader.GetInt32(14),
                         ID_Estado = reader.GetInt32(15)
                     };
+
+                    Usuario objBeanRel = new Usuario
+                    {
+                        ID = reader.GetInt32(16),
+                        NumeroDocumento = reader.GetString(17),
+                        Nombres = reader.GetString(18),
+                        ApellidoPaterno = reader.GetString(19),
+                        ApellidoMaterno = reader.GetString(20),
+                        FecNacimiento = reader.GetDateTime(21),
+                        Direccion = reader.GetString(22),
+                        NumeroDireccion = reader.GetString(23),
+                        TelefonoFijo = reader.GetString(24),
+                        Celular = reader.GetString(25),
+                        Codigo = reader.GetString(26),
+                        Correo = reader.GetString(27),
+                        Clave = reader.GetString(28),
+                        ID_TipoDocumento = reader.GetInt32(29),
+                        ID_Distrito = reader.GetInt32(30),
+                        ID_Rol = reader.GetInt32(31),
+                        ID_Escuela = reader.GetInt32(32)
+
+                    };
+
+                    objBean.usuario = objBeanRel;
 
                     reader.Close();
                     conn.Close();
@@ -307,7 +343,7 @@ namespace ProjectOPP.Models
             document1.Close();
         }
 
-        public void CreatePDFOneDocument()
+        public void CreatePDFOneDocument(Tramite tramite)
         {
             /*
              * GetHeight = 842
@@ -340,15 +376,19 @@ namespace ProjectOPP.Models
             ///Documento
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            string danho = DateTime.Now.ToString("yyyy");
-            string dmes = DateTime.Now.ToString("MM");
-            string ddia = DateTime.Now.ToString("dd");
-            string dhora = DateTime.Now.ToString("hh");
-            string dminuto = DateTime.Now.ToString("mm");
-            string dsegundo = DateTime.Now.ToString("ss");
+            DateTime FechaActual = DateTime.UtcNow;
+            TimeZoneInfo serverZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(FechaActual, serverZone);
+
+            string danho = currentDateTime.ToString("yyyy");
+            string dmes = currentDateTime.ToString("MM");
+            string ddia = currentDateTime.ToString("dd");
+            string dhora = currentDateTime.ToString("hh");
+            string dminuto = currentDateTime.ToString("mm");
+            string dsegundo = currentDateTime.ToString("ss");
             string fechacompleta = danho + dmes + ddia + dhora + dminuto + dsegundo;
 
-            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/CartaDePresentacion-" + fechacompleta + ".pdf");
+            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/CartaDePresentacion-" + tramite.usuario.Codigo + "-" + fechacompleta + ".pdf");
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument, PageSize.A4);
 
@@ -412,15 +452,15 @@ namespace ProjectOPP.Models
             senhores.SetTextAlignment(TextAlignment.LEFT);
             senhores.SetFontSize(12);
 
-            Paragraph empresa = new Paragraph("MFDR CONSULTING & GENERAL SERVICES SAC");
+            Paragraph empresa = new Paragraph(tramite.EmpresaNombre.ToUpper());
             empresa.SetTextAlignment(TextAlignment.LEFT);
             empresa.SetFontSize(12);
 
-            Paragraph ruc = new Paragraph("RUC: 20554079831");
+            Paragraph ruc = new Paragraph("RUC: " + tramite.EmpresaRuc);
             ruc.SetTextAlignment(TextAlignment.LEFT);
             ruc.SetFontSize(12);
 
-            Paragraph direccionEmpresa = new Paragraph("Av, Colonial 3046 - n 1001 Lima");
+            Paragraph direccionEmpresa = new Paragraph(tramite.EmpresaDireccion);
             direccionEmpresa.SetTextAlignment(TextAlignment.LEFT);
             direccionEmpresa.SetFontSize(12);
 
@@ -440,11 +480,11 @@ namespace ProjectOPP.Models
             ///Contenido
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Paragraph representante = new Paragraph("Atencion: Sr. Guiovanny Edward Delgado Garayar");
+            Paragraph representante = new Paragraph("Atencion: Sr(a). " + tramite.EmpresaJefe);
             representante.SetTextAlignment(TextAlignment.CENTER);
             representante.SetFontSize(12);
 
-            Paragraph cargo = new Paragraph("Gerente General");
+            Paragraph cargo = new Paragraph(tramite.EmpresaCargo);
             cargo.SetTextAlignment(TextAlignment.CENTER);
             cargo.SetFontSize(12);
 
@@ -452,7 +492,7 @@ namespace ProjectOPP.Models
             primerParrafo.SetTextAlignment(TextAlignment.JUSTIFIED);
             primerParrafo.SetFontSize(11);
 
-            Paragraph estudiante = new Paragraph("PEÑALOZA ORTEGA, BRIAN");
+            Paragraph estudiante = new Paragraph(tramite.usuario.Nombres);
             estudiante.SetTextAlignment(TextAlignment.CENTER);
             estudiante.SetFontSize(12);
 

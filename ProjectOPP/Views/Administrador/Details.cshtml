@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Solicitud de Carta de Presentacion</h2>
 
 <div>
-    <h4>Tramite</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -51,17 +50,89 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ID_Usuario)
+            @Html.DisplayNameFor(model => model.EmpresaNombre)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ID_Usuario)
+            @Html.DisplayFor(model => model.EmpresaNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaRuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaRuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaDireccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaJefe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaJefe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaCargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaCargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdjuntoUno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdjuntoUno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdjuntoDos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdjuntoDos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.NumeroDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.NumeroDireccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Estado)
         </dd>
 
     </dl>
 </div>
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
-    @Html.ActionLink("Back to List", "Index") |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")*@
     @Html.ActionLink("Generar PDF", "GeneratePDF", new { id = Model.ID })
 </p>

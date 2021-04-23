@@ -341,4 +341,11 @@ SELECT TOP (1000) [ID]
 
 
 
-  
+  --SELECT 
+  --T.ID, T.Tramite, T.DependenciaReferencia, T.NumeroTramite, T.FecCreacion, T.FundamentoSolicitud, T.EmpresaNombre, T.EmpresaRuc, T.EmpresaDireccion, T.EmpresaJefe, T.EmpresaCargo, T.AdjuntoUno, T.AdjuntoDos, T.ID_Usuario, T.ID_CicloAlumno, T.ID_Estado,
+  --U.ID, U.NumeroDocumento, U.Nombres, U.ApellidoPaterno, U.ApellidoMaterno, U.FecNacimiento, U.Direccion, U.NumeroDireccion, U.TelefonoFijo, U.Celular, U.Codigo, U.Correo, U.Clave, U.ID_TipoDocumento, U.ID_Distrito, U.ID_Rol, U.ID_Escuela
+  --FROM TB_Tramite T
+  --INNER JOIN TB_Usuario U
+  --ON T.ID_Usuario = U.ID
+  --WHERE T.ID = 16
+

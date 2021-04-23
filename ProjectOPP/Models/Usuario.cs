@@ -111,8 +111,7 @@ namespace ProjectOPP.Models
                         ID_TipoDocumento = reader.GetInt32(13),
                         ID_Distrito = reader.GetInt32(14),
                         ID_Rol = reader.GetInt32(15),
-                        ID_Escuela = reader.GetInt32(16)
-                        
+                        ID_Escuela = reader.GetInt32(16)                        
                     };
 
                     reader.Close();

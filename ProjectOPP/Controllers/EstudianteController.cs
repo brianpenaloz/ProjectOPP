@@ -48,6 +48,8 @@ namespace ProjectOPP.Controllers
 
         public ActionResult Tramite()
         {
+            ViewBag.Nombre = ((Usuario)Session["User"]).Nombres;
+
             List<CicloAlumno> lstBean = ca.Read();
             List<SelectListItem> lst = new List<SelectListItem>();
             lst = (from d in lstBean
