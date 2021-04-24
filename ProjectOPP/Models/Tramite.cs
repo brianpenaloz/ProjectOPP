@@ -13,6 +13,7 @@ using iText.Kernel.Font;
 using iText.IO.Font.Constants;
 using iText.Layout.Properties;
 using iText.IO.Image;
+using System.IO;
 
 namespace ProjectOPP.Models
 {
@@ -361,7 +362,7 @@ namespace ProjectOPP.Models
 
 
 
-        public void CreatePDFOneDocument(Tramite tramite)
+        public byte[] CreatePDFOneDocument(Tramite tramite)
         {
             /*
              * GetHeight = 842
@@ -408,7 +409,11 @@ namespace ProjectOPP.Models
 
             string dmespalabra = currentDateTime.ToString("MMMM");
 
-            PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/CartaDePresentacion-" + tramite.usuario.Codigo + "-" + fechacompleta + ".pdf");
+            byte[] pdfBytes;
+
+            MemoryStream memoryStream = new MemoryStream();
+            //PdfWriter pdfWriter = new PdfWriter("C:/Users/brian/source/repos/ArchivosOPPP/CartaDePresentacion-" + tramite.usuario.Codigo + "-" + fechacompleta + ".pdf");
+            PdfWriter pdfWriter = new PdfWriter(memoryStream);            
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument, PageSize.A4);
 
@@ -544,6 +549,57 @@ namespace ProjectOPP.Models
 
 
 
+            document.Flush();
+            document.Close();
+
+            pdfBytes = memoryStream.ToArray();
+
+            return pdfBytes;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public byte[] GenerarPDFDescargable()
+        {
+            byte[] pdfBytes;
+            MemoryStream memoryStream = new MemoryStream();
+            PdfWriter pdfWriter = new PdfWriter(memoryStream);
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDocument);
+            document.Add(new Paragraph("Hello World"));
+            document.Flush();
+            document.Close();
+
+            pdfBytes = memoryStream.ToArray();
+
+            return pdfBytes;
+        }
+
+        public void GenerarPDFDescargado()
+        {
+            PdfDocument pdfDocument = new PdfDocument(new PdfWriter(new FileStream("C:/Users/brian/source/repos/ArchivosOPPP/hello.pdf", FileMode.Create, FileAccess.Write)));
+            Document document = new Document(pdfDocument);
+
+            String line = "Hello! Welcome to iTextPdf";
+            document.Add(new Paragraph(line));
             document.Close();
         }
     }
