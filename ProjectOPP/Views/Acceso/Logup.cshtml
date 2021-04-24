@@ -2,6 +2,9 @@
 
 @{
     ViewBag.Title = "Logup";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+    List<SelectListItem> itemsf = (List<SelectListItem>)ViewBag.itemsf;
+    List<SelectListItem> itemsd = (List<SelectListItem>)ViewBag.itemsd;
     Layout = "~/Views/Shared/LayoutLogin.cshtml";
 }
 
@@ -11,7 +14,7 @@
 
     <div class="form-horizontal">
         <p class="login-box-msg">Ingrese sus credenciales</p>
-       
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="input-group mb-3">
@@ -45,12 +48,19 @@
             @Html.EditorFor(model => model.FecNacimiento, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
         </div>
 
-        <div class="input-group mb-3">
-            @Html.EditorFor(model => model.ID_TipoDocumento, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo de documento" } })
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user"></span>
+        @*<div class="input-group mb-3">
+                @Html.EditorFor(model => model.ID_TipoDocumento, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo de documento" } })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
                 </div>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_TipoDocumento, htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_TipoDocumento", items, "Seleccionar", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_TipoDocumento, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -63,12 +73,19 @@
             </div>
         </div>
 
-        <div class="input-group mb-3">
-            @Html.EditorFor(model => model.ID_Distrito, new { htmlAttributes = new { @class = "form-control", @placeholder = "Departamento" } })
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user"></span>
+        @*<div class="input-group mb-3">
+                @Html.EditorFor(model => model.ID_Distrito, new { htmlAttributes = new { @class = "form-control", @placeholder = "Departamento" } })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
                 </div>
+            </div>*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.distrito.provincia.departamento.ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID", itemsd, "Seleccionar", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -88,7 +105,7 @@
                     <span class="fas fa-user"></span>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="input-group mb-3">
             @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
@@ -125,8 +142,8 @@
                 </div>
             </div>
         </div>
-        
-        <div class="input-group mb-3">
+
+        @*<div class="input-group mb-3">
             @Html.EditorFor(model => model.ID_Escuela, new { htmlAttributes = new { @class = "form-control", @placeholder = "Facultad" } })
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -142,7 +159,7 @@
                     <span class="fas fa-user"></span>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="input-group mb-3">
             @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Codigo" } })
@@ -199,24 +216,24 @@
 @section scripts
 {
     <script>
-        //$(document).ready(function () {
-        //    $("#signupform").submit(function (e) {
-        //        e.preventDefault();
+            //$(document).ready(function () {
+            //    $("#signupform").submit(function (e) {
+            //        e.preventDefault();
 
-        //        url = "www.google.com"
-        //        parametros = $(this).serialize();
+            //        url = "www.google.com"
+            //        parametros = $(this).serialize();
 
-        //        alert("1")
+            //        alert("1")
 
-        //        $.post(url, parametros, function (data){
+            //        $.post(url, parametros, function (data){
 
-        //            if (data == "1") {
-        //                document.location.href = "www.youtube.com";
-        //            } else {
-        //                alert(data)
-        //            }
-        //        })
-        //    })
-        //})
-    </script>   
+            //            if (data == "1") {
+            //                document.location.href = "www.youtube.com";
+            //            } else {
+            //                alert(data)
+            //            }
+            //        })
+            //    })
+            //})
+    </script>
 }

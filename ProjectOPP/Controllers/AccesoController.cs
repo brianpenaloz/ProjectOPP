@@ -11,6 +11,15 @@ namespace ProjectOPP.Controllers
     {
         readonly Usuario u = new Usuario();
 
+        readonly TipoDocumento td = new TipoDocumento();
+
+        readonly Facultad f = new Facultad();
+        readonly Escuela e = new Escuela();
+
+        readonly Departamento d = new Departamento();
+        readonly Provincia p = new Provincia();
+        readonly Distrito di = new Distrito();
+
         // GET: Acceso
         public ActionResult Index()
         {
@@ -57,6 +66,42 @@ namespace ProjectOPP.Controllers
 
         public ActionResult Logup()
         {
+            List<TipoDocumento> lstBean = td.Read();
+            List<SelectListItem> lst = new List<SelectListItem>();
+            lst = (from d in lstBean
+                   select new SelectListItem
+                   {
+                       Value = d.ID.ToString(),
+                       Text = d.Nombre
+                   }).ToList();
+
+            ViewBag.items = lst;
+
+
+            //List<Facultad> lstBeanf = f.Read();
+            //List<SelectListItem> lstf = new List<SelectListItem>();
+            //lstf = (from d in lstBeanf
+            //       select new SelectListItem
+            //       {
+            //           Value = d.ID.ToString(),
+            //           Text = d.Nombre
+            //       }).ToList();
+
+            //ViewBag.itemsf = lstf;
+
+
+            //List<Departamento> lstBeand = d.Read();
+            //List<SelectListItem> lstd = new List<SelectListItem>();
+            //lstd = (from d in lstBeand
+            //        select new SelectListItem
+            //        {
+            //            Value = d.ID.ToString(),
+            //            Text = d.Nombre
+            //        }).ToList();
+
+            //ViewBag.itemsd = lstd;
+
+
             return View();
         }
 
@@ -66,6 +111,8 @@ namespace ProjectOPP.Controllers
             try
             {
                 usuario.ID_Rol = 2;
+                usuario.ID_Distrito = 1;
+                usuario.ID_Escuela = 1;
 
                 u.Logup(usuario);
 

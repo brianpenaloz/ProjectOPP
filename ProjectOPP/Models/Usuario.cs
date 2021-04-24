@@ -29,6 +29,7 @@ namespace ProjectOPP.Models
         public string Codigo { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }
+        [DisplayName("Tipo de documento")]
         public int ID_TipoDocumento { get; set; }
         public int ID_Distrito { get; set; }
         public int ID_Rol { get; set; }
