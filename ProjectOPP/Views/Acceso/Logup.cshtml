@@ -15,7 +15,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Nombres" name="nombre">
+            @Html.EditorFor(model => model.Nombres, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombres" } })
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellidopaterno">
+            @Html.EditorFor(model => model.ApellidoPaterno, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido paterno" } })
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -33,11 +33,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="date" class="form-control" placeholder="Fecha de nacimiento" name="fecnacimiento">
-        </div>
-
-        <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Correo" name="correo">
+            @Html.EditorFor(model => model.ApellidoMaterno, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido materno" } })
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -46,7 +42,11 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Clave" name="clave">
+            @Html.EditorFor(model => model.FecNacimiento, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.ID_TipoDocumento, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo de documento" } })
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -55,7 +55,124 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Repetir clave" name="clavedos">
+            @Html.EditorFor(model => model.NumeroDocumento, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de documento" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.ID_Distrito, new { htmlAttributes = new { @class = "form-control", @placeholder = "Departamento" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.ID_Distrito, new { htmlAttributes = new { @class = "form-control", @placeholder = "Provincia" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.ID_Distrito, new { htmlAttributes = new { @class = "form-control", @placeholder = "Distrito" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Direccion" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.NumeroDireccion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de direccion" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.TelefonoFijo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono fijo" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control", @placeholder = "Celular" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.ID_Escuela, new { htmlAttributes = new { @class = "form-control", @placeholder = "Facultad" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.ID_Escuela, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escuela" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Codigo" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Correo" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control", @placeholder = "Clave" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control", @placeholder = "Repetir clave" } })
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>

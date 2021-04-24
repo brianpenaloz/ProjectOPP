@@ -32,7 +32,22 @@ namespace ProjectOPP.Models
         public int ID_TipoDocumento { get; set; }
         public int ID_Distrito { get; set; }
         public int ID_Rol { get; set; }
-        public int ID_Escuela { get; set; }        
+        public int ID_Escuela { get; set; }
+
+
+        public TipoDocumento tipoDocumento;
+        public Distrito distrito;
+        public Rol rol;
+        public Escuela escuela;
+
+
+
+
+
+
+
+
+
 
         readonly Conexion con = new Conexion();
 

@@ -166,8 +166,14 @@
     </Compile>
     <Compile Include="Models\CicloAlumno.cs" />
     <Compile Include="Models\Conexion.cs" />
+    <Compile Include="Models\Departamento.cs" />
+    <Compile Include="Models\Distrito.cs" />
+    <Compile Include="Models\Escuela.cs" />
+    <Compile Include="Models\Facultad.cs" />
     <Compile Include="Models\Persona.cs" />
+    <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\TipoDocumento.cs" />
     <Compile Include="Models\Tramite.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

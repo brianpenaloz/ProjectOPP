@@ -61,33 +61,15 @@ namespace ProjectOPP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logup(string nombre, string apellidopaterno, DateTime fecnacimiento, string correo, string clave)
+        public ActionResult Logup(Usuario usuario)
         {
             try
             {
-                Usuario creado = new Usuario
-                {
-                    NumeroDocumento = "12345678",
-                    Nombres = nombre,
-                    ApellidoPaterno = apellidopaterno,
-                    ApellidoMaterno = apellidopaterno,
-                    FecNacimiento = fecnacimiento,
-                    Direccion = apellidopaterno,
-                    NumeroDireccion = apellidopaterno,
-                    TelefonoFijo = apellidopaterno,
-                    Celular = apellidopaterno,
-                    Codigo = apellidopaterno,
-                    Correo = correo,
-                    Clave = clave,
-                    ID_TipoDocumento = 1,
-                    ID_Distrito = 6,
-                    ID_Escuela = 2,
-                    ID_Rol = 2
-                };
+                usuario.ID_Rol = 2;
 
-                u.Logup(creado);
+                u.Logup(usuario);
 
-                Session["User"] = creado;
+                Session["User"] = usuario;
 
                 return RedirectToAction("Index", "Estudiante");
             }
